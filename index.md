@@ -2,4 +2,6 @@
 
 誠意作成中...  
 このチュートリアルは[@saba1024](https://twitter.com/saba1024)が個人的に作成しているものです。  
-問題等ございましたら優しくお知らせください。
+問題等ございましたら優しくお知らせください。  
+
+[Apache Groovyのチュートリアルも有ります。](http://koji-k.github.io/groovy-tutorial/)
