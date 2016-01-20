@@ -161,7 +161,7 @@ grails>
 ```
 
 これでGrailsが起動できました。  
-[http://localhost:8080](http://localhost:808)にアクセスしてみましょう。  
+[http://localhost:8080](http://localhost:8080)にアクセスしてみましょう。  
 以下のような画面が表示されるはずです。
 
 ![Qiita](images/welcome-to-grails.png)
