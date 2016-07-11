@@ -1,0 +1,198 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>3.3. データを保存する - Grailsチュートリアル</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/my.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <i class="fa fa-bars sidebar-toggle"></i>
+        <span class="title"><a href="../index.html">Grailsチュートリアル</a></span>
+      </div>
+      <div class="sidebar">
+        <ul>
+          <li class="numbered visible"><a href="../index.html" data-alt-hash="grails"><span class="number">1.</span>Grailsチュートリアル</a></li>
+          <li class="numbered visible">
+            <a href="../helloworld/index.html" data-alt-hash="helloworld"><span class="number">2.</span>まずはHelloWorld</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="../helloworld/create-project.html" data-alt-hash="grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</a>
+                <ul>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</a></li>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</a></li>
+                </ul>
+              </li>
+              <li class="numbered visible"><a href="../helloworld/controller.html" data-alt-hash="id-acbc3bedce5152ebd29de7e6ea168842ec7e897a"><span class="number">2.2.</span>コントローラの作成</a></li>
+              <li class="numbered visible"><a href="../helloworld/view.html" data-alt-hash="id-a2487187369f0d3d2cf4d1a3cbf3dd40fcf32c02"><span class="number">2.3.</span>ビューの作成</a></li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="index.html" data-alt-hash="todo"><span class="number">3.</span>ToDoアプリケーション</a>
+            <ul>
+              <li class="numbered visible"><a href="preparation.html" data-alt-hash="id-5be5cb5c47435369bea367333779ccc36510813c"><span class="number">3.1.</span>準備</a></li>
+              <li class="numbered visible"><a href="form.html" data-alt-hash="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.2.</span>フォームでデータを送信</a></li>
+              <li class="numbered visible"><a href="domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</a></li>
+              <li class="numbered visible"><a href="form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="content-handle"></div>
+        <div class="content-container">
+          <div class="content-nav content-nav-top">
+            <a class="prev-page" href="form.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.2.</span>
+            フォームでデータを送信
+            </a>
+            <a class="next-page" href="form2.html">
+            <span class="number">3.4.</span>
+            フォームのデータを保存
+            <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="page-toc">
+            <ul>
+              <li class="numbered visible"><a href="#id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</a></li>
+            </ul>
+          </div>
+          <div class="main-content">
+            <h2 id="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</h2>
+            <p>さて、フォームのデータをアプリケーションサーバ（Grails）に送信することが出来ました。<br/>そうなるとやぱりこのデータをデータベースに保存したくなりますよね。<br/>Grailsでは、**標準でH2Databaseが搭載されていて、別途DBをインストールする必要はありません。** </p>
+            <p>標準の設定だと、Grailsが終了（stop-appした段階）で、データベースは破棄されます。<br/>不思議に思われるかも知れませんが、コレはGrailsの学習段階、そして新規にアプリケーションを立ち上げる際にその威力を発揮してくれます。<br/>というのも、標準設定だとGrailsを起動した時点（run-app）で、自動的にデータベース、そしてテーブルがGrailsによって作成されます。<br/>詳細は別途記述しますので、ココではコレ以上細かい話は気にせず、とりあえずGrailsの素晴らしさを体験してみましょう！</p>
+            <p>まず、インタラクティブモードで以下のコマンドを実行してください。</p>
+            <pre><code class="console">grails&gt; create-domain-class todo
+</code></pre>
+            <p>すると以下の２つのファイルが作成されます。</p>
+            <pre><code class="nohighlight">grails-app/domain/mytodo/Todo.groovy
+src/test/groovy/mytodo/TodoSpec.groovy
+</code></pre>
+            <p>Controllerの時と同様、２つ目がテスト用です。<br/>そして、最初に作製されている<code>Todo.groovy</code>が <strong>ドメイン</strong> と呼ばれるもので、MVCでいうM（Model）に該当します。<br/>Grailsでは、このドメインがGORM（Grails Object Relational Mapping)というORMを通して、データベースのテーブルと関連付けられます。 </p>
+            <p>では、作成された<code>grails-app/domain/mytodo/Todo.groovy</code>を開いてみましょう。 </p>
+            <pre><code class="groovy">package mytodo
+
+class Todo {
+
+    static constraints = {
+    }
+}
+
+</code></pre>
+            <p>何の変哲もないGroovyファイルですね。 では、以下のように一つプロパティを追加してみます。</p>
+            <pre><code class="groovy">package mytodo
+
+class Todo {
+    
+    String todoName
+
+    static constraints = {
+    }
+}
+</code></pre>
+            <p>さて、それでは <strong>一旦Grailsを再起動してください。</strong> Grailsでは、ドメインを編集すると、一旦Grailsを再起動しないと上手く反映されません。<br/>面倒くさい、と思われるかも知れませんが、その面倒臭さを超える利便性をこれから目の当たりにします！ </p>
+            <pre><code class="nohighlight">grails&gt; stop-app
+grails&gt; run-app
+</code></pre>
+            <p>再起動できたら<a href="http://localhost:8080/dbconsole">http://localhost:8080/dbconsole</a>にアクセスしてみてください。</p>
+            <p><img src="images/login-dbconsole.png" alt="login-dbconsole"/></p>
+            <p>コレはGrailsが用意してくれているH2データベース用のWEBクライアントです。<br/>基本的にデフォルトの設定のままでOKのはずです。<br/>もしアクセスできない場合は、 <strong>JDBC URL:</strong> の部分が<code>jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE</code>になっているか確認してください。<br/>では、「接続」をクリックしてみてください。 </p>
+            <p><img src="images/h2-top.png" alt="h2-top"/></p>
+            <p>左上を見てください！ <strong>何もしていないのに既にTODOテーブルが存在しています！</strong><br/>別途SQLを書く必要もなく、さらに手動でマイグレーションツール等を毎回手動で実行する必要もありません！<br/>もちろん本番環境用にマイグレーションツールなども用意されています。その当たりはまた別の章で記載します。 </p>
+            <p>しかしGrailsの生産性の高さはコレだにとどまりません。<br/>続いて、インタラクティブコンソールで以下のコマンドを実行してみてください。</p>
+            <pre><code class="console">grails&gt; create-scaffold-controller todo
+</code></pre>
+            <p>すると、<code>grails-app/controllers/mytodo/TodoController.groovy</code>というファイルが生成されます。<br/>つまり、新しい<code>Todo</code>というControllerが作成されたということですね。 中身を見てみましょう。</p>
+            <pre><code class="groovy">package mytodo
+
+class TodoController {
+
+    static scaffold = Todo
+
+}
+</code></pre>
+            <p>１行だけ<code>static scaffold = Todo</code>という記述があるだけでActionは定義されていません。<br/>では、このコントローラにアクセスしてみましょう。<br/><a href="http://localhost:8080/todo">http://localhost:8080/todo</a> </p>
+            <p><img src="images/scaffold1.png" alt="scaffold1"/></p>
+            <p>なんと！先ほどの１行のみのControllerにアクセスするとCRUD機能が利用できるようになっています！<br/>コレがGrailsのScaffoldです。</p>
+            <p>では実際に「New Todo」をクリックしてデータを保存してみてください。<br/>（ブラウザの言語設定によって、自動的にメニューが翻訳されます！これもGrailsの素晴らしいi18n機能によるものです。） </p>
+            <p><img src="images/scaffold2.png" alt="scaffold2"/></p>
+            <p>saveをクリックすると&hellip;</p>
+            <p><img src="images/scaffold3.png" alt="scaffold3"/></p>
+            <p>保存されました！<br/>当然この画面でデータの編集、削除も出来ます。<br/>適当に数件データを登録したりしてみましょう。 </p>
+            <p>最終的に以下のようにデータを登録しました。</p>
+            <p><img src="images/scaffold4.png" alt="scaffold4"/></p>
+            <p>再度<a href="http://localhost:8080/dbconsole">http://localhost:8080/dbconsole</a>にアクセスして、todoテーブルの中身を見てみるとちゃんとデータベースにデータが保存されていることが確認できます！</p>
+            <p><img src="images/dbconsole1.png" alt="dbconsole1"/></p>
+            <p>では、今度はこの保存したデータを実際にGrailsで表示してみましょう！</p>
+            <p>まず、<code>grails-app/controllers/mytodo/IndexController.groovy</code>の<code>index</code>アクションを以下のように修正します。 </p>
+            <pre><code class="groovy">package mytodo
+
+class IndexController {
+
+    def index() {
+        render(view:&#39;/index/index&#39;, model: [todos : Todo.listOrderById()])
+    }
+
+    def formTest() {
+        String todoName = params.todo
+        render todoName
+    }
+}
+</code></pre>
+            <p>そして、View用のファイル、<code>grails-app/views/index/index.gsp</code>を以下のように修正します。 　</p>
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;ToDo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Todo application&lt;/p&gt;
+&lt;g:form controller=&quot;index&quot; action=&quot;formTest&quot;&gt;
+    &lt;g:textField name=&quot;todo&quot;/&gt;
+    &lt;g:submitButton name=&quot;add-todo&quot;&gt;Add Todo&lt;/g:submitButton&gt;
+&lt;/g:form&gt;
+
+&lt;!-- 追加 --&gt;
+&lt;ul&gt;
+&lt;g:each in=&quot;${todos}&quot; var=&quot;todo&quot;&gt;
+    &lt;li&gt;${todo.todoName}&lt;/li&gt;
+&lt;/g:each&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>では、<a href="http://localhost:8080/index/index">http://localhost:8080/index/index</a>にアクセスしてください。 　</p>
+            <p><img src="images/listed-todo.png" alt="listed-todo"/></p>
+            <p>先ほどScaffoldで登録したToDoの一覧が表示されていますね！</p>
+          </div>
+          <div class="content-nav content-nav-bottom">
+            <a class="prev-page" href="form.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.2.</span>
+            フォームでデータを送信
+            </a>
+            <a class="next-page" href="form2.html">
+            <span class="number">3.4.</span>
+            フォームのデータを保存
+            <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="footer">
+            <p class="credit text-muted">Powered by <a href="https://github.com/kobo/gaiden">Gaiden</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/highlight.js"></script>
+    <script src="../js/application.js"></script>
+    <script src="../js/my.js"></script>
+  </body>
+</html>
