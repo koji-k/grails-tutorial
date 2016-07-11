@@ -67,7 +67,6 @@
 class IndexController {
 
     def index() {
-        // there is no problem about code completion on controller.
         render(view:&#39;/index/index&#39;, model:[todos : Todo.listOrderById()])
     }
 
@@ -94,7 +93,6 @@ class IndexController {
             <pre><code class="html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-    &lt;meta name=&quot;layout&quot; content=&quot;my-layout&quot;/&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
     &lt;title&gt;ToDo&lt;/title&gt;
 &lt;/head&gt;
