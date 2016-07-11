@@ -11,7 +11,6 @@ package mytodo
 class IndexController {
 
     def index() {
-        // there is no problem about code completion on controller.
         render(view:'/index/index', model:[todos : Todo.listOrderById()])
     }
 
@@ -41,7 +40,6 @@ class IndexController {
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="layout" content="my-layout"/>
     <meta charset="UTF-8">
     <title>ToDo</title>
 </head>
