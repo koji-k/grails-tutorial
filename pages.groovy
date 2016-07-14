@@ -12,4 +12,5 @@
     "todo-application/domain.md"()
     "todo-application/form2.md"()
     "todo-application/delete.md"()
+    "todo-application/edit.md"()
 }
