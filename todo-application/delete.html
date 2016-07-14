@@ -1,0 +1,186 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>3.5. データの削除 - Grailsチュートリアル</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/my.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <i class="fa fa-bars sidebar-toggle"></i>
+        <span class="title"><a href="../index.html">Grailsチュートリアル</a></span>
+      </div>
+      <div class="sidebar">
+        <ul>
+          <li class="numbered visible"><a href="../index.html" data-alt-hash="grails"><span class="number">1.</span>Grailsチュートリアル</a></li>
+          <li class="numbered visible">
+            <a href="../helloworld/index.html" data-alt-hash="helloworld"><span class="number">2.</span>まずはHelloWorld</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="../helloworld/create-project.html" data-alt-hash="grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</a>
+                <ul>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</a></li>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</a></li>
+                </ul>
+              </li>
+              <li class="numbered visible"><a href="../helloworld/controller.html" data-alt-hash="id-acbc3bedce5152ebd29de7e6ea168842ec7e897a"><span class="number">2.2.</span>コントローラの作成</a></li>
+              <li class="numbered visible"><a href="../helloworld/view.html" data-alt-hash="id-a2487187369f0d3d2cf4d1a3cbf3dd40fcf32c02"><span class="number">2.3.</span>ビューの作成</a></li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="index.html" data-alt-hash="todo"><span class="number">3.</span>ToDoアプリケーション</a>
+            <ul>
+              <li class="numbered visible"><a href="preparation.html" data-alt-hash="id-5be5cb5c47435369bea367333779ccc36510813c"><span class="number">3.1.</span>準備</a></li>
+              <li class="numbered visible"><a href="form.html" data-alt-hash="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.2.</span>フォームでデータを送信</a></li>
+              <li class="numbered visible"><a href="domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</a></li>
+              <li class="numbered visible"><a href="form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</a></li>
+              <li class="numbered visible"><a href="delete.html" data-alt-hash="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.5.</span>データの削除</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="content-handle"></div>
+        <div class="content-container">
+          <div class="content-nav content-nav-top">
+            <a class="prev-page" href="form2.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.4.</span>
+            フォームのデータを保存
+            </a>
+          </div>
+          <div class="page-toc">
+            <ul>
+              <li class="numbered visible"><a href="#id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.5.</span>データの削除</a></li>
+            </ul>
+          </div>
+          <div class="main-content">
+            <h2 id="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.5.</span>データの削除</h2>
+            <p>メモ：ココで学ぶこと - ドメインの削除 - flashスコープ - paramsの概要 - g:linkでパラメータを渡す方法 - GrailsのURLのシンプルな概要（ついでにidというパラメタがある場合は省略されて/数字という値になることも説明</p>
+            <p>データを登録できるようになったので、データの削除機能も作っていきましょう</p>
+            <p>以下のように、Indexコントローラ（<code>grails-app/controllers/mytodo/IndexController.groovy</code>）に<code>delete</code>というアクションを追加しましょう。 </p>
+            <pre><code class="groovy">package mytodo
+
+class IndexController {
+
+    def index() {
+        render(view:&#39;/index/index&#39;, model:[todos : Todo.listOrderById()])
+    }
+
+    def formTest() {
+        String todoName = params.todo
+        render todoName
+    }
+
+    def save() {
+        String todoName = params.todo
+        Todo newTodo = new Todo(todoName: todoName)
+        if (newTodo.validate()) {
+            newTodo.save()
+            redirect(controller: &quot;index&quot;, action: &quot;index&quot;)
+        } else {
+            render(view:&#39;/index/index&#39;, model:[errorTodo: newTodo, todos: Todo.listOrderById()])
+        }
+    }
+
+    // コレを追加
+    def delete() {
+        Todo todo = Todo.get(params.long(&quot;id&quot;))
+        // 渡された&quot;id&quot;Todoがちゃんとある場合
+        if (todo) {
+            todo.delete()
+            flash.message = &quot;deleted&quot;
+        } else {
+            flash.error = &quot;TodoId:${params.long(&quot;id&quot;)} is not found&quot;
+        }
+        redirect (controller: &quot;index&quot;, action: &quot;index&quot;)
+    }
+}
+</code></pre>
+            <p>次に、テンプレート(<code>grails-app/views/index/index.gsp</code>)に、Todoの一覧を表示している部分に削除のためのリンクを付けましょう。</p>
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta name=&quot;layout&quot; content=&quot;my-layout&quot;/&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;ToDo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- メッセージ表示を追加--&gt;
+&lt;g:if test=&quot;${flash.message}&quot;&gt;
+    &lt;div style=&quot;background-color: #269abc&quot;&gt;${flash.message}&lt;/div&gt;
+&lt;/g:if&gt;
+&lt;g:if test=&quot;${flash.error}&quot;&gt;
+    &lt;div style=&quot;background-color: #db7093&quot;&gt;${flash.error}&lt;/div&gt;
+&lt;/g:if&gt;
+
+&lt;p&gt;Todo application&lt;/p&gt;
+&lt;!-- エラーメッセージを表示する部分 --&gt;
+&lt;g:renderErrors bean=&quot;${errorTodo}&quot; as=&quot;list&quot; field=&quot;todoName&quot;/&gt;
+
+&lt;g:form controller=&quot;index&quot; action=&quot;save&quot;&gt;
+    &lt;g:textField name=&quot;todo&quot;/&gt;
+    &lt;g:submitButton name=&quot;add-todo&quot;&gt;Add Todo&lt;/g:submitButton&gt;
+&lt;/g:form&gt;
+
+&lt;ul&gt;
+&lt;g:each in=&quot;${todos}&quot; var=&quot;todo&quot;&gt;
+    &lt;!-- この部分を修正。削除用リンク（追加したdeleteアクションへのリンク）を追加 --&gt;
+    &lt;li&gt;
+        ${todo.todoName}
+        &lt;g:link controller=&quot;index&quot; action=&quot;delete&quot; params=&quot;[&#39;id&#39;:todo.id]&quot;&gt;
+            削除
+        &lt;/g:link&gt;
+    &lt;/li&gt;
+&lt;/g:each&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>はい！これで完了です！<br/>既にTodoが何かある状態でアクセスすると以下のような画面が表示されます。<br/><a href="http://localhost:8080/index/index">http://localhost:8080/index/index</a>にアクセスしてみましょう。</p>
+            <p><img src="images/delete.png" alt="delete"/></p>
+            <p>今回新しく出てきたgsp専用タグが２つ有ります。<br/>まず一つ目が<code>g:if</code>ですね。<br/>その名のとおり、変数の状態を確認します。<code>test=&quot;${Groovy式}&quot;</code>を指定することで、変数の指定されたGroovy式がtrueを返せば<code>g:if</code>タグの中身を表示します。<br/>なお、今回は２つの独立した<code>g:if</code>を使って、それぞれ<code>flash.message</code>と<code>flash.error</code>という２つの変数の中身があるかどうかをチェックしています。<br/>そして２つ目の新しいタグが<code>g:link</code>です。コレは単純にHTMLのaタグを出力するものです。<br/>便利な点として、リンクに渡すクエリストリングを、GroovyのMapで記述することが出来る点です。<br/><code>params=&quot;[&#39;id&#39;:todo.id]</code>がそうです。<br/>実際にこの<code>a:link</code>で出力されたHTMLは以下のようになります。 </p>
+            <pre><code class="html">&lt;a href=&quot;/index/delete/1&quot;&gt;
+  削除
+&lt;/a&gt;
+</code></pre>
+            <p>単純HTMLですね。<br/>当然上記のHTMLをGSP内に直接<code>&lt;a href=&quot;/index/delete/${todo.id}&quot;&gt;削除&lt;/a&gt;</code>と記述しても全く問題ありません。<br/>状況に応じて使い分けましょう。（個人的には<code>g:link</code>を使うほうがオススメですが。） </p>
+            <p>それでは、何か適当にTodoを登録して、その横に表示されている「削除」をクリックしてみてください。</p>
+            <p><img src="images/delete-success.png" alt="delete-success"/></p>
+            <p>削除出来ましたね！ さら青い背景でメッセージもちゃんと出ていますね。コレは<code>flash.message</code>を使いました。<br/>flashスコープはその１リクエストのみ有効なので、この画面をリフレッシュすると、<code>flash.message</code>は空っぽになって、このメッセージは表示されなくなります。<br/>このように一回コッキリのメッセージを表示するのに非常に便利です。<br/>では、既に存在しないTodoを削除してみましょう<br/><a href="http://localhost:8080/index/delete/1">http://localhost:8080/index/delete/1</a>にアクセスしてみてください。</p>
+            <p><img src="images/delete-error.png" alt="delete-error"/></p>
+            <p>ちゃんと赤い背景でエラーメッセージが出力されましたね！<br/>コレも同様にflashスコープの<code>flash.error</code>を使用してエラーメッセージを表示しています。<br/>これもflashスコープなので、画面を更新すれば<code>flash.error</code>の中身が自動的に空っぽになってメッセージは表示されないことが確認できます。 </p>
+          </div>
+          <div class="content-nav content-nav-bottom">
+            <a class="prev-page" href="form2.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.4.</span>
+            フォームのデータを保存
+            </a>
+          </div>
+          <div class="footer">
+            <p class="credit text-muted">Powered by <a href="https://github.com/kobo/gaiden">Gaiden</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/highlight.js"></script>
+    <script src="../js/application.js"></script>
+    <script src="../js/my.js"></script>
+    <script>
+      if (window.WebSocket) {
+        var socket = new WebSocket("ws://localhost:52370/");
+        socket.onmessage = function () {
+          location.reload();
+        };
+      }
+    </script>
+  </body>
+</html>

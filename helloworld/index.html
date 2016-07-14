@@ -39,6 +39,7 @@
               <li class="numbered visible"><a href="../todo-application/form.html" data-alt-hash="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.2.</span>フォームでデータを送信</a></li>
               <li class="numbered visible"><a href="../todo-application/domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</a></li>
               <li class="numbered visible"><a href="../todo-application/form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</a></li>
+              <li class="numbered visible"><a href="../todo-application/delete.html" data-alt-hash="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.5.</span>データの削除</a></li>
             </ul>
           </li>
         </ul>
@@ -88,5 +89,13 @@
     <script src="../js/highlight.js"></script>
     <script src="../js/application.js"></script>
     <script src="../js/my.js"></script>
+    <script>
+      if (window.WebSocket) {
+        var socket = new WebSocket("ws://localhost:52370/");
+        socket.onmessage = function () {
+          location.reload();
+        };
+      }
+    </script>
   </body>
 </html>
