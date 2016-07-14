@@ -40,6 +40,7 @@
               <li class="numbered visible"><a href="todo-application/domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</a></li>
               <li class="numbered visible"><a href="todo-application/form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</a></li>
               <li class="numbered visible"><a href="todo-application/delete.html" data-alt-hash="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.5.</span>データの削除</a></li>
+              <li class="numbered visible"><a href="todo-application/edit.html" data-alt-hash="id-1f8b5b4047f10e94405a71ee14e2ab2003a52e15"><span class="number">3.6.</span>データの編集</a></li>
             </ul>
           </li>
         </ul>
@@ -62,7 +63,7 @@
           <div class="main-content">
             <h1 id="grails"><span class="number">1.</span>Grailsチュートリアル</h1>
             <p>誠意作成中&hellip;<br/>このチュートリアルは<a href="https://twitter.com/saba1024">@saba1024</a>が個人的に作成しているものです。<br/>問題等ございましたら優しくお知らせください。<br/>また、チュートリアルとしてTodoアプリを作成して行きますが、Grailsで重要な機能や知識なども別途記載していきますので、Grailsの入門としても活用できるようにしていく予定です。 <a href="http://koji-k.github.io/groovy-tutorial/">Apache Groovyのチュートリアルも有ります。</a></p>
-            <pre><code class="nohighlight">2016/07/14 Todoアプリケーションに削除についてを追加
+            <pre><code class="nohighlight">2016/07/14 Todoアプリケーションに削除と編集についてを追加
 2016/07/11 ToDoアプリケーション追加
 </code></pre>
           </div>
@@ -85,7 +86,7 @@
     <script src="js/my.js"></script>
     <script>
       if (window.WebSocket) {
-        var socket = new WebSocket("ws://localhost:39871/");
+        var socket = new WebSocket("ws://localhost:37222/");
         socket.onmessage = function () {
           location.reload();
         };

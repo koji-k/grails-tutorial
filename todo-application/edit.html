@@ -1,0 +1,287 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>3.6. データの編集 - Grailsチュートリアル</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/my.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <i class="fa fa-bars sidebar-toggle"></i>
+        <span class="title"><a href="../index.html">Grailsチュートリアル</a></span>
+      </div>
+      <div class="sidebar">
+        <ul>
+          <li class="numbered visible"><a href="../index.html" data-alt-hash="grails"><span class="number">1.</span>Grailsチュートリアル</a></li>
+          <li class="numbered visible">
+            <a href="../helloworld/index.html" data-alt-hash="helloworld"><span class="number">2.</span>まずはHelloWorld</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="../helloworld/create-project.html" data-alt-hash="grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</a>
+                <ul>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</a></li>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</a></li>
+                </ul>
+              </li>
+              <li class="numbered visible"><a href="../helloworld/controller.html" data-alt-hash="id-acbc3bedce5152ebd29de7e6ea168842ec7e897a"><span class="number">2.2.</span>コントローラの作成</a></li>
+              <li class="numbered visible"><a href="../helloworld/view.html" data-alt-hash="id-a2487187369f0d3d2cf4d1a3cbf3dd40fcf32c02"><span class="number">2.3.</span>ビューの作成</a></li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="index.html" data-alt-hash="todo"><span class="number">3.</span>ToDoアプリケーション</a>
+            <ul>
+              <li class="numbered visible"><a href="preparation.html" data-alt-hash="id-5be5cb5c47435369bea367333779ccc36510813c"><span class="number">3.1.</span>準備</a></li>
+              <li class="numbered visible"><a href="form.html" data-alt-hash="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.2.</span>フォームでデータを送信</a></li>
+              <li class="numbered visible"><a href="domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</a></li>
+              <li class="numbered visible"><a href="form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</a></li>
+              <li class="numbered visible"><a href="delete.html" data-alt-hash="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.5.</span>データの削除</a></li>
+              <li class="numbered visible"><a href="edit.html" data-alt-hash="id-1f8b5b4047f10e94405a71ee14e2ab2003a52e15"><span class="number">3.6.</span>データの編集</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="content-handle"></div>
+        <div class="content-container">
+          <div class="content-nav content-nav-top">
+            <a class="prev-page" href="delete.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.5.</span>
+            データの削除
+            </a>
+          </div>
+          <div class="page-toc">
+            <ul>
+              <li class="numbered visible"><a href="#id-1f8b5b4047f10e94405a71ee14e2ab2003a52e15"><span class="number">3.6.</span>データの編集</a></li>
+            </ul>
+          </div>
+          <div class="main-content">
+            <h2 id="id-1f8b5b4047f10e94405a71ee14e2ab2003a52e15"><span class="number">3.6.</span>データの編集</h2>
+            <p>メモ：ココで学ぶこと - データバインディング - validate - バインディングを利用して、saveとupdateを統一できる。（index.gspとedit.gpsの送信先のアクションの統一）</p>
+            <p>では、データの編集もしていきましょう。</p>
+            <p>IndexController(<code>grails-app/controllers/mytodo/IndexController.groovy</code>)に２つのアクションメソッド<code>edit</code>と<code>update</code>を追加します。</p>
+            <pre><code class="groovy">package mytodo
+
+class IndexController {
+
+    def index() {
+        render(view:&#39;/index/index&#39;, model:[todos : Todo.listOrderById()])
+    }
+
+    def formTest() {
+        String todoName = params.todo
+        render todoName
+    }
+
+    def save() {
+        String todoName = params.todo
+        Todo newTodo = new Todo(todoName: todoName)
+        if (newTodo.validate()) {
+            newTodo.save()
+            redirect(controller: &quot;index&quot;, action: &quot;index&quot;)
+        } else {
+            render(view:&#39;/index/index&#39;, model:[errorTodo: newTodo, todos: Todo.listOrderById()])
+        }
+    }
+
+    def delete() {
+        Todo todo = Todo.get(params.long(&quot;id&quot;))
+        // 渡された&quot;id&quot;Todoがちゃんとある場合
+        if (todo) {
+            todo.delete()
+            flash.message = &quot;deleted&quot;
+        } else {
+            flash.error = &quot;TodoId:${params.long(&quot;id&quot;)} is not found&quot;
+        }
+        redirect (controller: &quot;index&quot;, action: &quot;index&quot;)
+    }
+    
+    // 追加1/2
+    def edit(Todo todo) {
+        if (todo) {
+            render(view: &#39;/index/edit&#39;, model:[todo:todo])
+        } else {
+            flash.error = &quot;TodoId:${params.long(&quot;id&quot;)} is not found&quot;
+            redirect (controller: &quot;index&quot;, action: &quot;index&quot;)
+        }
+    }
+    // 追加 2/2
+    def update(Todo todo) {
+        if (todo &amp;&amp; todo.validate()) {
+            todo.save()
+            flash.message = &quot;TodoId:${todo.id} was updated&quot;
+            redirect(controller: &quot;index&quot;, view: &quot;index&quot;)
+        } else {
+            if (!todo) {
+                flash.error = &quot;Todo is not found&quot;
+                redirect(controller:&quot;index&quot;, action: &quot;index&quot;)
+            } else {
+                flash.error = &quot;validation error&quot;
+                render(view: &#39;/index/edit&#39;, model:[todo:todo])
+            }
+        }
+    }
+}
+
+</code></pre>
+            <p>注目すべき点は、アクションメソッドの引数に<code>Todo todo</code>を指定している点ですね。<br/>こうすることで、GrailsはGET、もしくはPOSTで取得できるデータのから自動的にアクションメソッドに指定した型のインスタンスを生成して値を突っ込んでくれます。 </p>
+            <p>そして対応するテンプレートの<code>grails-app/views/index/edit.gsp</code>を作成します。</p>
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta name=&quot;layout&quot; content=&quot;my-layout&quot;/&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;ToDo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;g:if test=&quot;${flash.message}&quot;&gt;
+    &lt;div style=&quot;background-color: #269abc&quot;&gt;${flash.message}&lt;/div&gt;
+&lt;/g:if&gt;
+&lt;g:if test=&quot;${flash.error}&quot;&gt;
+    &lt;div style=&quot;background-color: #db7093&quot;&gt;${flash.error}&lt;/div&gt;
+&lt;/g:if&gt;
+&lt;p&gt;Todo application&lt;/p&gt;
+&lt;!-- エラーメッセージを表示する部分 --&gt;
+&lt;g:renderErrors bean=&quot;${todo}&quot; as=&quot;list&quot; field=&quot;todoName&quot;/&gt;
+
+&lt;g:form controller=&quot;index&quot; action=&quot;update&quot;&gt;
+    &lt;g:hiddenField name=&quot;id&quot; value=&quot;${todo.id}&quot; /&gt;
+    &lt;g:textField name=&quot;todoName&quot; value=&quot;${todo.todoName}&quot;/&gt;
+    &lt;g:submitButton name=&quot;update&quot;&gt;update&lt;/g:submitButton&gt;
+&lt;/g:form&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>さらに、トップページの各Todoに編集リンクを付けます。<br/><code>grails-app/views/index/index.gsp</code></p>
+            <pre><code class="html">&lt;g:each in=&quot;${todos}&quot; var=&quot;todo&quot;&gt;
+    &lt;li&gt;
+        ${todo.todoName}
+        &lt;g:link controller=&quot;index&quot; action=&quot;delete&quot; params=&quot;[&#39;id&#39;:todo.id]&quot;&gt;
+            削除
+        &lt;/g:link&gt;
+        &lt;!-- コレを追加 --&gt;
+        &lt;g:link controller=&quot;index&quot; action=&quot;edit&quot; params=&quot;[&#39;id&#39;:todo.id]&quot;&gt;
+            編集
+        &lt;/g:link&gt;
+    &lt;/li&gt;
+&lt;/g:each&gt;
+</code></pre>
+            <p>これで完了です！<br/><a href="http://localhost:8080/index/index">http://localhost:8080/index/index</a>にアクセスして適当なTodoを作ってみましょう。 </p>
+            <p><img src="images/edit-1.png" alt="edit-1"/></p>
+            <p>編集リンクが追加されていますね！<br/>では、編集リンクをクリックしてみましょう。 </p>
+            <p><img src="images/edit-2.png" alt="edit-2"/></p>
+            <p>編集画面が表示されますね。<br/>では、適当に修正して、updateをクリックしてみてください。 </p>
+            <p><img src="images/edit-3.png" alt="edit-3"/></p>
+            <p>ちゃんと保存されました！<br/>コレでWEBアプリケーションフレームワークで最も重要なCRUDの一連の流れをマスターすることが出来ました！<br/>ちゃんとバリデーションチェックもしているので、エラーメッセージを表示できています。</p>
+            <p><img src="images/edit-4.png" alt="edit-4"/></p>
+            <p>URLが/index/updateのままになっていますね。 そして重要な点として、先ほどeditした際の情報（入力したテキスト（今回はからのデータ）と、TodoのID（hiddenフィールド）の値もこのエラー画面に表示しているので、このエラーが出ている状態でちゃんと値を修正して、再度updateをクリックすればちゃんと値が更新される点です。<br/><img src="images/edit-5.png" alt="edit-5"/> <img src="images/edit-6.png" alt="edit-6"/></p>
+            <p>更新出来ました！</p>
+            <p>さて、今回のデータバインディング機能を利用すると、実はTodoの新規登録（saveアクションメソッド）と今回の更新（updateアクションメソッド）を統一することが出来ます！ </p>
+            <p>今回は、updateメソッドとsaveメソッドを統一して<code>save</code>メソッドとしましょう。<br/>。。。といっても実はもうメソッド自体はできているので、単純に<code>save</code>アクションメソッドを削除して、今回作成した<code>update</code>アクションメソッドを、<code>save</code>にリネームするだけです。<br/>ちなみに、このアクションメソッド自体にルールはありません。単純にCREATEとUPDATEを同時に担うメソッド名なら、saveという名前がピッタリなので私がそうしただけです。（Scaffoldもこのネーミングです。）<br/>なので、別に<code>hoge</code>という名前でも構いません。 </p>
+            <p>最終的に<code>IndexController(</code>grails-app/controllers/mytodo/IndexController.groovy`)は以下のようになります。 </p>
+            <pre><code class="groovy">package mytodo
+
+class IndexController {
+
+    def index() {
+        render(view:&#39;/index/index&#39;, model:[todos : Todo.listOrderById()])
+    }
+
+    def formTest() {
+        String todoName = params.todo
+        render todoName
+    }
+
+    // saveアクションメソッドは削除した。
+
+    def delete() {
+        Todo todo = Todo.get(params.long(&quot;id&quot;))
+        // 渡された&quot;id&quot;Todoがちゃんとある場合
+        if (todo) {
+            todo.delete()
+            flash.message = &quot;deleted&quot;
+        } else {
+            flash.error = &quot;TodoId:${params.long(&quot;id&quot;)} is not found&quot;
+        }
+        redirect (controller: &quot;index&quot;, action: &quot;index&quot;)
+    }
+
+    def edit(Todo todo) {
+        if (todo) {
+            render(view: &#39;/index/edit&#39;, model:[todo:todo])
+        } else {
+            flash.error = &quot;TodoId:${params.long(&quot;id&quot;)} is not found&quot;
+            redirect (controller: &quot;index&quot;, action: &quot;index&quot;)
+        }
+    }
+
+    // updateからsaveにリネーム
+    // 新規作成時も、更新時もこのアクションメソッドを利用する。
+    def save(Todo todo) {
+        if (todo &amp;&amp; todo.validate()) {
+            todo.save()
+            flash.message = &quot;TodoId:${todo.id} was updated&quot;
+            redirect(controller: &quot;index&quot;, view: &quot;index&quot;)
+        } else {
+            if (!todo) {
+                flash.error = &quot;Todo is not found&quot;
+                redirect(controller:&quot;index&quot;, action: &quot;index&quot;)
+            } else {
+                flash.error = &quot;validation error&quot;
+                render(view: &#39;/index/edit&#39;, model:[todo:todo])
+            }
+        }
+    }
+}
+</code></pre>
+            <p>そして、<code>grails-app/views/index/index.gsp</code>のフォームの部分を以下のように編集します。 </p>
+            <pre><code class="html">&lt;g:form controller=&quot;index&quot; action=&quot;save&quot;&gt;
+    &lt;!-- nameをtodoNameに修正 --&gt;
+    &lt;g:textField name=&quot;todoName&quot;/&gt;
+    &lt;g:submitButton name=&quot;add-todo&quot;&gt;Add Todo&lt;/g:submitButton&gt;
+&lt;/g:form&gt;
+</code></pre>
+            <p>この変更で、saveアクションメソッドがTodoを自動的に生成する際に、該当するプロパティ（todoName）に自動的にこの値を代入してくれるようになりました。<br/>actionは元々saveだったので変更の必要なしです。</p>
+            <p><code>grails-app/views/index/edit.gsp</code>は単純にactionの指定を<code>update</code>からsaveに変更するだけです。 </p>
+            <pre><code class="html">&lt;g:form controller=&quot;index&quot; action=&quot;save&quot;&gt;
+    &lt;g:hiddenField name=&quot;id&quot; value=&quot;${todo.id}&quot; /&gt;
+    &lt;g:textField name=&quot;todoName&quot; value=&quot;${todo.todoName}&quot;/&gt;
+    &lt;g:submitButton name=&quot;update&quot;&gt;update&lt;/g:submitButton&gt;
+&lt;/g:form&gt;
+</code></pre>
+            <p>コレで完了です。<br/>実際に色々自分で動かして動作を確認してみてください。<br/>Grailsが如何に簡単にWEBアプリケーションを作成できるかがこれで分かりますね。</p>
+            <p>でもGrailsの魅力はコレだけにとどまりません。もっともっと素敵な機能を触ってどんどん自分のスキルを洗練させていきましょう！</p>
+          </div>
+          <div class="content-nav content-nav-bottom">
+            <a class="prev-page" href="delete.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.5.</span>
+            データの削除
+            </a>
+          </div>
+          <div class="footer">
+            <p class="credit text-muted">Powered by <a href="https://github.com/kobo/gaiden">Gaiden</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/highlight.js"></script>
+    <script src="../js/application.js"></script>
+    <script src="../js/my.js"></script>
+    <script>
+      if (window.WebSocket) {
+        var socket = new WebSocket("ws://localhost:37222/");
+        socket.onmessage = function () {
+          location.reload();
+        };
+      }
+    </script>
+  </body>
+</html>
