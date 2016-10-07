@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>3.2. フォームでデータを送信 - Grailsチュートリアル</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/my.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-84847594-1', 'auto');
+      ga('send', 'pageview');
+      
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <i class="fa fa-bars sidebar-toggle"></i>
+        <span class="title"><a href="../index.html">Grailsチュートリアル</a></span>
+      </div>
+      <div class="sidebar">
+        <ul>
+          <li class="numbered visible"><a href="../index.html" data-alt-hash="grails"><span class="number">1.</span>Grailsチュートリアル</a></li>
+          <li class="numbered visible">
+            <a href="../helloworld/index.html" data-alt-hash="helloworld"><span class="number">2.</span>まずはHelloWorld</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="../helloworld/create-project.html" data-alt-hash="grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</a>
+                <ul>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</a></li>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</a></li>
+                </ul>
+              </li>
+              <li class="numbered visible"><a href="../helloworld/controller.html" data-alt-hash="id-acbc3bedce5152ebd29de7e6ea168842ec7e897a"><span class="number">2.2.</span>コントローラの作成</a></li>
+              <li class="numbered visible"><a href="../helloworld/view.html" data-alt-hash="id-a2487187369f0d3d2cf4d1a3cbf3dd40fcf32c02"><span class="number">2.3.</span>ビューの作成</a></li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="index.html" data-alt-hash="todo"><span class="number">3.</span>ToDoアプリケーション</a>
+            <ul>
+              <li class="numbered visible"><a href="preparation.html" data-alt-hash="id-5be5cb5c47435369bea367333779ccc36510813c"><span class="number">3.1.</span>準備</a></li>
+              <li class="numbered visible"><a href="form.html" data-alt-hash="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.2.</span>フォームでデータを送信</a></li>
+              <li class="numbered visible"><a href="domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</a></li>
+              <li class="numbered visible"><a href="form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</a></li>
+              <li class="numbered visible"><a href="delete.html" data-alt-hash="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.5.</span>データの削除</a></li>
+              <li class="numbered visible"><a href="edit.html" data-alt-hash="id-1f8b5b4047f10e94405a71ee14e2ab2003a52e15"><span class="number">3.6.</span>データの編集</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="content-handle"></div>
+        <div class="content-container">
+          <div class="content-nav content-nav-top">
+            <a class="prev-page" href="preparation.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.1.</span>
+            準備
+            </a>
+            <a class="next-page" href="domain.html">
+            <span class="number">3.3.</span>
+            データを保存する
+            <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="page-toc">
+            <ul>
+              <li class="numbered visible"><a href="#id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.2.</span>フォームでデータを送信</a></li>
+            </ul>
+          </div>
+          <div class="main-content">
+            <h2 id="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.2.</span>フォームでデータを送信</h2>
+            <p>では、先ほど作成したView（index.gsp）から、Controllerにデータを送信する方法を見てみましょう。<br/>なお、Todoという言うことは最低限Todoを入力する1つのテキストボックスが必要ですね。 </p>
+            <p><code>grails-app/views/index/index.gsp</code>を以下のようにします。</p>
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;ToDo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Todo application&lt;/p&gt;
+&lt;g:form controller=&quot;index&quot; action=&quot;formTest&quot;&gt;
+    &lt;g:textField name=&quot;todo&quot;/&gt;
+    &lt;g:submitButton name=&quot;add-todo&quot;&gt;Add Todo&lt;/g:submitButton&gt;
+&lt;/g:form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>では、<a href="http://localhost:8080/index/index">http://localhost:8080/index/index</a>にアクセスしてみましょう。</p>
+            <p><img src="images/2.png" alt="2"/></p>
+            <p>フォームが表示されていますね！</p>
+            <p><code>&lt;g:...&gt;</code>で表記されている部分が、GSPで利用できる特種な記法です。<br/>上記のGSPは、</p>
+            <pre><code class="html">&lt;form action=&quot;/index/formTest&quot; method=&quot;post&quot; &gt;
+    &lt;input type=&quot;text&quot; name=&quot;todo&quot; value=&quot;&quot; id=&quot;todo&quot; /&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;add-todo&quot; value=&quot;add-todo&quot; id=&quot;add-todo&quot; /&gt;
+&lt;/form&gt;
+</code></pre>
+            <p>というHTMLに変換されてブラウザに返されます。<br/>つまり、別にGSPタグを利用しなくても、普通にHTMLタグを記述しても問題ありません。<br/>ただし、IDEを要している場合は、もしController名やアクション名が変更になった場合には、<code>&lt;g:form controller=&quot;index&quot; action=&quot;formTest&quot;&gt;</code>の部分も自動的に書き換えてくれたりするので、個人的にはGSPタグが利用できる場合にはGSPタグを利用するのがオススメです。 </p>
+            <p>では、続いてControllerにActionを追加しましょう。 <code>grails-app/controllers/mytodo/IndexController.groovy</code>を以下のようにしてみます。</p>
+            <pre><code class="groovy">package mytodo
+
+class IndexController {
+
+    def index() { }
+
+    // 以下を追加
+    def formTest() {
+        String todoName = params.todo
+        render todoName
+    }
+}
+
+</code></pre>
+            <p>では、<a href="http://localhost:8080/index/index">http://localhost:8080/index/index</a>にアクセスして、適当に何か入力して「add-todo」をクリックしてみてください。<br/>画面が変わって、自分が入力した内容が画面に表示されていますね？<br/>おめでとうございます！今クライアント（ブラウザ）からデータをアプリケーションサーバ（Grails）に送信してそのデータを表示することが出来ました！</p>
+          </div>
+          <div class="content-nav content-nav-bottom">
+            <a class="prev-page" href="preparation.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.1.</span>
+            準備
+            </a>
+            <a class="next-page" href="domain.html">
+            <span class="number">3.3.</span>
+            データを保存する
+            <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="footer">
+            <p class="credit text-muted">Powered by <a href="https://github.com/kobo/gaiden">Gaiden</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/highlight.js"></script>
+    <script src="../js/application.js"></script>
+    <script src="../js/my.js"></script>
+  </body>
+</html>

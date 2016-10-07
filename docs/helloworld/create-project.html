@@ -1,0 +1,237 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>2.1. Grailsアプリケーションの作成 - Grailsチュートリアル</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/my.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-84847594-1', 'auto');
+      ga('send', 'pageview');
+      
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <i class="fa fa-bars sidebar-toggle"></i>
+        <span class="title"><a href="../index.html">Grailsチュートリアル</a></span>
+      </div>
+      <div class="sidebar">
+        <ul>
+          <li class="numbered visible"><a href="../index.html" data-alt-hash="grails"><span class="number">1.</span>Grailsチュートリアル</a></li>
+          <li class="numbered visible">
+            <a href="index.html" data-alt-hash="helloworld"><span class="number">2.</span>まずはHelloWorld</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="create-project.html" data-alt-hash="grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</a>
+                <ul>
+                  <li class="numbered visible"><a href="create-project.html#id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</a></li>
+                  <li class="numbered visible"><a href="create-project.html#id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</a></li>
+                </ul>
+              </li>
+              <li class="numbered visible"><a href="controller.html" data-alt-hash="id-acbc3bedce5152ebd29de7e6ea168842ec7e897a"><span class="number">2.2.</span>コントローラの作成</a></li>
+              <li class="numbered visible"><a href="view.html" data-alt-hash="id-a2487187369f0d3d2cf4d1a3cbf3dd40fcf32c02"><span class="number">2.3.</span>ビューの作成</a></li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="../todo-application/index.html" data-alt-hash="todo"><span class="number">3.</span>ToDoアプリケーション</a>
+            <ul>
+              <li class="numbered visible"><a href="../todo-application/preparation.html" data-alt-hash="id-5be5cb5c47435369bea367333779ccc36510813c"><span class="number">3.1.</span>準備</a></li>
+              <li class="numbered visible"><a href="../todo-application/form.html" data-alt-hash="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.2.</span>フォームでデータを送信</a></li>
+              <li class="numbered visible"><a href="../todo-application/domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</a></li>
+              <li class="numbered visible"><a href="../todo-application/form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</a></li>
+              <li class="numbered visible"><a href="../todo-application/delete.html" data-alt-hash="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.5.</span>データの削除</a></li>
+              <li class="numbered visible"><a href="../todo-application/edit.html" data-alt-hash="id-1f8b5b4047f10e94405a71ee14e2ab2003a52e15"><span class="number">3.6.</span>データの編集</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="content-handle"></div>
+        <div class="content-container">
+          <div class="content-nav content-nav-top">
+            <a class="prev-page" href="index.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">2.</span>
+            まずはHelloWorld
+            </a>
+            <a class="next-page" href="controller.html">
+            <span class="number">2.2.</span>
+            コントローラの作成
+            <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="page-toc">
+            <ul>
+              <li class="numbered visible">
+                <a href="#grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</a>
+                <ul>
+                  <li class="numbered visible"><a href="#id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</a></li>
+                  <li class="numbered visible"><a href="#id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="main-content">
+            <h2 id="grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</h2>
+            <p>さて、まずはGrailsアプリケーションを作成していきます。<br/>前提条件： JDK8、Grails3.0.11がインストールされていること。<br/>また、Grailsは基本的にコマンドラインを使って様々なコマンドを実行していきます。<br/>コマンドラインに慣れていない方は少し戸惑うかもしれませんが、慣れてしまえばどうということはありません。<br/>頑張って進めていきましょう！</p>
+            <h3 id="id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</h3>
+            <p>Grailsのアプリケーションを作成するには、<code>grails create-app アプリケーション名</code>を実行します。<br/>そのコマンドを実行したディレクトリに、指定した<code>アプリケーション名</code>のディレクトリが作成され、その中にGrailsのすべてのファイルが格納されています。<br/>それでは早速Grailsアプリケーションを作成しましょう！<br/>今回は<code>hello_grails</code>というアプリケーション名にしましょう。 </p>
+            <p><code>grails create-app hello_grails</code></p>
+            <p>コマンドを実行すると、</p>
+            <pre><code class="nohighlight">| Application created at /Users/koji/IdeaProjects/hello_grails
+</code></pre>
+            <p>と表示されます。<br/>では<code>hello_grails</code>ディレクトリの中に移動しましょう！</p>
+            <pre><code class="console">[koji:IdeaProjects]$ cd hello_grails/
+</code></pre>
+            <p>以降、この<code>hello_grails</code>を<code>アプリケーションホーム</code>と記述してきます。<br/>なお、私のこのテスト環境では、このアプリケーションホームのフルパスは<code>/Users/koji/IdeaProjects/hello_grails</code>となっています。<br/>もしこのチュートリアル内で<code>アプリケーションホーム/hoge.txt</code>のような記述があった場合、<code>/Users/koji/IdeaProjects/hello_grails/hoge.txt</code>と同等です。</p>
+            <p>さて、アプリケーションホームの中身は現在、デフォルト状態で以下のようになっています。 </p>
+            <pre><code class="console">├── build.gradle
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+├── grails-app
+│   ├── assets
+│   │   ├── images
+│   │   │   ├── apple-touch-icon-retina.png
+│   │   │   ├── apple-touch-icon.png
+│   │   │   ├── favicon.ico
+│   │   │   ├── grails_logo.png
+│   │   │   ├── skin
+│   │   │   │   ├── database_add.png
+│   │   │   │   ├── database_delete.png
+│   │   │   │   ├── database_edit.png
+│   │   │   │   ├── database_save.png
+│   │   │   │   ├── database_table.png
+│   │   │   │   ├── exclamation.png
+│   │   │   │   ├── house.png
+│   │   │   │   ├── information.png
+│   │   │   │   ├── shadow.jpg
+│   │   │   │   ├── sorted_asc.gif
+│   │   │   │   └── sorted_desc.gif
+│   │   │   └── spinner.gif
+│   │   ├── javascripts
+│   │   │   ├── application.js
+│   │   │   └── jquery-2.1.3.js
+│   │   └── stylesheets
+│   │       ├── application.css
+│   │       ├── errors.css
+│   │       ├── main.css
+│   │       └── mobile.css
+│   ├── conf
+│   │   ├── application.yml
+│   │   ├── logback.groovy
+│   │   └── spring
+│   │       └── resources.groovy
+│   ├── controllers
+│   │   └── UrlMappings.groovy
+│   ├── domain
+│   ├── i18n
+│   │   ├── messages.properties
+│   │   ├── messages_cs_CZ.properties
+│   │   ├── messages_da.properties
+│   │   ├── messages_de.properties
+│   │   ├── messages_es.properties
+│   │   ├── messages_fr.properties
+│   │   ├── messages_it.properties
+│   │   ├── messages_ja.properties
+│   │   ├── messages_nb.properties
+│   │   ├── messages_nl.properties
+│   │   ├── messages_pl.properties
+│   │   ├── messages_pt_BR.properties
+│   │   ├── messages_pt_PT.properties
+│   │   ├── messages_ru.properties
+│   │   ├── messages_sv.properties
+│   │   ├── messages_th.properties
+│   │   └── messages_zh_CN.properties
+│   ├── init
+│   │   ├── BootStrap.groovy
+│   │   └── hello_grails
+│   │       └── Application.groovy
+│   ├── services
+│   ├── taglib
+│   ├── utils
+│   └── views
+│       ├── error.gsp
+│       ├── index.gsp
+│       ├── layouts
+│       │   └── main.gsp
+│       └── notFound.gsp
+└── src
+    ├── integration-test
+    │   └── groovy
+    ├── main
+    │   ├── groovy
+    │   └── webapp
+    └── test
+        └── groovy
+</code></pre>
+            <p>なんだかいろいろありますね。<br/>全ておいおい見ていけばわかってきますので今は得にきにする必要はありません。 </p>
+            <h3 id="id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</h3>
+            <p>まず、コマンドライン上で<code>アプリケーションホーム</code>に移動しておいてください。<br/>続いて、以下のコマンドを実行します。</p>
+            <pre><code class="nohighlight">grails
+</code></pre>
+            <p><code>grails</code>コマンドだけを実行すると、 <strong>インタラクティブモード</strong> に入ります。<br/>これで、毎回<code>grails</code>と入力しなくても、続くオプションコマンドのみ入力すれば良くなります。<br/>また、コマンドの実行自体も早くなります。 </p>
+            <p>いろいろ画面に文字が現れるのでびっくりするかもしれませんが、Grailsに必要なライブラリなどが自動的にダウンロード、設定されています。<br/>初めてGraislを実行する際にはこのように若干時間がかかります。休憩しながらしばらく待ちましょう。 </p>
+            <p>さて、すべての作業が完了したら、コマンドプロンプトは以下のような表示になっています。 </p>
+            <pre><code class="console">grails&gt;
+</code></pre>
+            <p>このように表示されていたら、現在インタラクティブモードということです。<br/>ではいよいよGrailsを起動します!!</p>
+            <p>以下のコマンドを実行してください。</p>
+            <pre><code class="console">run-app
+</code></pre>
+            <p>以下のようなメッセージが表示されます。</p>
+            <pre><code class="console">grails&gt; run-app
+| Running application...
+Grails application running at http://localhost:8080 in environment: development
+grails&gt;
+</code></pre>
+            <p>これでGrailsが起動できました。<br/><a href="http://localhost:8080">http://localhost:8080</a>にアクセスしてみましょう。<br/>以下のような画面が表示されるはずです。</p>
+            <p><img src="images/welcome-to-grails.png" alt="Qiita"/></p>
+            <p>おめでとうございます！<br/>これでGrailsアプリケーションを作成することができました！<br/>それでは、Grailsを停止してみましょう。 インタラクティブモード状態のコマンドプロンプト上で、以下のコマンドを実行します。 </p>
+            <pre><code class="console">stop-app
+</code></pre>
+            <p>以下のようなメッセージが表示されれば正常にGrailsが停止できています。</p>
+            <pre><code class="console">grails&gt; stop-app
+| Shutting down application...
+| Application shutdown.
+grails&gt;
+</code></pre>
+          </div>
+          <div class="content-nav content-nav-bottom">
+            <a class="prev-page" href="index.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">2.</span>
+            まずはHelloWorld
+            </a>
+            <a class="next-page" href="controller.html">
+            <span class="number">2.2.</span>
+            コントローラの作成
+            <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="footer">
+            <p class="credit text-muted">Powered by <a href="https://github.com/kobo/gaiden">Gaiden</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/highlight.js"></script>
+    <script src="../js/application.js"></script>
+    <script src="../js/my.js"></script>
+  </body>
+</html>

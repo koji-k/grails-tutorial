@@ -1,0 +1,166 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>3.4. フォームのデータを保存 - Grailsチュートリアル</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/my.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-84847594-1', 'auto');
+      ga('send', 'pageview');
+      
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <i class="fa fa-bars sidebar-toggle"></i>
+        <span class="title"><a href="../index.html">Grailsチュートリアル</a></span>
+      </div>
+      <div class="sidebar">
+        <ul>
+          <li class="numbered visible"><a href="../index.html" data-alt-hash="grails"><span class="number">1.</span>Grailsチュートリアル</a></li>
+          <li class="numbered visible">
+            <a href="../helloworld/index.html" data-alt-hash="helloworld"><span class="number">2.</span>まずはHelloWorld</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="../helloworld/create-project.html" data-alt-hash="grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</a>
+                <ul>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</a></li>
+                  <li class="numbered visible"><a href="../helloworld/create-project.html#id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</a></li>
+                </ul>
+              </li>
+              <li class="numbered visible"><a href="../helloworld/controller.html" data-alt-hash="id-acbc3bedce5152ebd29de7e6ea168842ec7e897a"><span class="number">2.2.</span>コントローラの作成</a></li>
+              <li class="numbered visible"><a href="../helloworld/view.html" data-alt-hash="id-a2487187369f0d3d2cf4d1a3cbf3dd40fcf32c02"><span class="number">2.3.</span>ビューの作成</a></li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="index.html" data-alt-hash="todo"><span class="number">3.</span>ToDoアプリケーション</a>
+            <ul>
+              <li class="numbered visible"><a href="preparation.html" data-alt-hash="id-5be5cb5c47435369bea367333779ccc36510813c"><span class="number">3.1.</span>準備</a></li>
+              <li class="numbered visible"><a href="form.html" data-alt-hash="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.2.</span>フォームでデータを送信</a></li>
+              <li class="numbered visible"><a href="domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.3.</span>データを保存する</a></li>
+              <li class="numbered visible"><a href="form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</a></li>
+              <li class="numbered visible"><a href="delete.html" data-alt-hash="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.5.</span>データの削除</a></li>
+              <li class="numbered visible"><a href="edit.html" data-alt-hash="id-1f8b5b4047f10e94405a71ee14e2ab2003a52e15"><span class="number">3.6.</span>データの編集</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="content-handle"></div>
+        <div class="content-container">
+          <div class="content-nav content-nav-top">
+            <a class="prev-page" href="domain.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.3.</span>
+            データを保存する
+            </a>
+            <a class="next-page" href="delete.html">
+            <span class="number">3.5.</span>
+            データの削除
+            <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="page-toc">
+            <ul>
+              <li class="numbered visible"><a href="#id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</a></li>
+            </ul>
+          </div>
+          <div class="main-content">
+            <h2 id="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.4.</span>フォームのデータを保存</h2>
+            <p>では、実際にフォームでデータを送信して、そのデータをデータベースに保存するようにしてみましょう と言っても本当に簡単です。</p>
+            <p>まず、フォームからデータを受け取って保存する部分をController &lsquo;controllers/mytodo/IndexController.groovy&rsquo; に記述します。</p>
+            <pre><code class="groovy">package mytodo
+
+class IndexController {
+
+    def index() {
+        render(view:&#39;/index/index&#39;, model:[todos : Todo.listOrderById()])
+    }
+
+    def formTest() {
+        String todoName = params.todo
+        render todoName
+    }
+
+    // ココを追加。ここでフォームのデータを受け取ってデータベースに保存している。
+    def save() {
+        String todoName = params.todo
+        Todo newTodo = new Todo(todoName: todoName)
+        if (newTodo.validate()) {
+            newTodo.save()
+            redirect(controller: &quot;index&quot;, action: &quot;index&quot;)
+        } else {
+            render(view:&#39;/index/index&#39;, model:[errorTodo: newTodo, todos: Todo.listOrderById()])
+        }
+    }
+}
+
+</code></pre>
+            <p>そして <code>grails-app/views/index/index.gsp</code> も少し修正します。</p>
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;ToDo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Todo application&lt;/p&gt;
+
+&lt;!-- エラーメッセージを表示する部分を追加 --&gt;
+&lt;g:renderErrors bean=&quot;${errorTodo}&quot; as=&quot;list&quot; field=&quot;todoName&quot;/&gt;
+
+&lt;!--actionを先ほど追加したsaveに変更--&gt;
+&lt;g:form controller=&quot;index&quot; action=&quot;save&quot;&gt;
+    &lt;g:textField name=&quot;todo&quot;/&gt;
+    &lt;g:submitButton name=&quot;add-todo&quot;&gt;Add Todo&lt;/g:submitButton&gt;
+&lt;/g:form&gt;
+
+&lt;!-- 追加 --&gt;
+&lt;ul&gt;
+&lt;g:each in=&quot;${todos}&quot; var=&quot;todo&quot;&gt;
+    &lt;li&gt;${todo.todoName}&lt;/li&gt;
+&lt;/g:each&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>コレで完了です！<br/>では<a href="http://localhost:8080/index/index">http://localhost:8080/index/index</a>にアクセスして、何か入力して「add-todo」をクリックしてみましょう。</p>
+            <p><img src="images/form2-1.png" alt="form2-1"/></p>
+            <p>登録出来ました！<br/>ところで、普通に考えて何も入力せずに「add-todo」をクリックするとエラーになるべきですよね？<br/>では、何も入力せずに「add-todo」をクリックして試してみましょう！</p>
+            <p><img src="images/form2-2.png" alt="form2-2"/></p>
+            <p>なんと！ちゃんとエラーが表示されましたね！<br/>このエラーメッセージはGrailsが用意してくれているもので、さらにi18n機能と連携しているので、ブラウザの言語設定によってメッセージが自動的に最適な言語に切り替わります。<br/>コレでToDoを保存する最低限の機能が実装できました。 </p>
+          </div>
+          <div class="content-nav content-nav-bottom">
+            <a class="prev-page" href="domain.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">3.3.</span>
+            データを保存する
+            </a>
+            <a class="next-page" href="delete.html">
+            <span class="number">3.5.</span>
+            データの削除
+            <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          <div class="footer">
+            <p class="credit text-muted">Powered by <a href="https://github.com/kobo/gaiden">Gaiden</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/highlight.js"></script>
+    <script src="../js/application.js"></script>
+    <script src="../js/my.js"></script>
+  </body>
+</html>
