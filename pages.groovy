@@ -6,11 +6,18 @@
 }
 
 
-"todo-application/index.md"() {
-    "todo-application/preparation.md"()
-    "todo-application/form.md"()
-    "todo-application/domain.md"()
-    "todo-application/form2.md"()
-    "todo-application/delete.md"()
-    "todo-application/edit.md"()
+"tutorials/index.md"() {
+    "tutorials/todo-application/index.md"() {
+        "tutorials/todo-application/preparation.md"()
+        "tutorials/todo-application/form.md"()
+        "tutorials/todo-application/domain.md"()
+        "tutorials/todo-application/form2.md"()
+        "tutorials/todo-application/delete.md"()
+        "tutorials/todo-application/edit.md"()
+        "tutorials/todo-application/service.md"()
+    }
+}
+
+"documents/index.md"(){
+
 }

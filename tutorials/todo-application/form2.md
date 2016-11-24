@@ -3,7 +3,7 @@
 では、実際にフォームでデータを送信して、そのデータをデータベースに保存するようにしてみましょう
 と言っても本当に簡単です。
 
-まず、フォームからデータを受け取って保存する部分をController 'controllers/mytodo/IndexController.groovy' に記述します。
+まず、フォームからデータを受け取って保存する部分をController `controllers/mytodo/IndexController.groovy` に記述します。
 
 ```groovy
 package mytodo

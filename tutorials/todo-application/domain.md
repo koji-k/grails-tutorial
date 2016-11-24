@@ -2,7 +2,7 @@
 
 さて、フォームのデータをアプリケーションサーバ（Grails）に送信することが出来ました。  
 そうなるとやぱりこのデータをデータベースに保存したくなりますよね。  
-Grailsでは、**標準でH2Databaseが搭載されていて、別途DBをインストールする必要はありません。**  
+Grailsでは、 **標準でH2Databaseが搭載されていて、別途DBをインストールする必要はありません。**  
 
 標準の設定だと、Grailsが終了（stop-appした段階）で、データベースは破棄されます。  
 不思議に思われるかも知れませんが、コレはGrailsの学習段階、そして新規にアプリケーションを立ち上げる際にその威力を発揮してくれます。  
@@ -81,6 +81,8 @@ grails> run-app
 しかしGrailsの生産性の高さはコレだにとどまりません。  
 続いて、インタラクティブコンソールで以下のコマンドを実行してみてください。
 
+# Scaffold
+
 ```console
 grails> create-scaffold-controller todo
 ```
@@ -131,6 +133,7 @@ saveをクリックすると...
 
 ![dbconsole1](images/dbconsole1.png)
 
+# 保存したデータの表示
 では、今度はこの保存したデータを実際にGrailsで表示してみましょう！
 
 まず、`grails-app/controllers/mytodo/IndexController.groovy`の`index`アクションを以下のように修正します。  
