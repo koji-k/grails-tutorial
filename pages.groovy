@@ -19,5 +19,5 @@
 }
 
 "documents/index.md"(){
-
+    "documents/asset-pipeline/index.md"()
 }

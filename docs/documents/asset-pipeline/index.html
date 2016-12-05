@@ -1,0 +1,720 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>4.1. Asset Pipeline - Grailsチュートリアル</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/my.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-84847594-1', 'auto');
+      ga('send', 'pageview');
+      
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <i class="fa fa-bars sidebar-toggle"></i>
+        <span class="title"><a href="../../index.html">Grailsチュートリアル</a></span>
+      </div>
+      <div class="sidebar">
+        <ul>
+          <li class="numbered visible"><a href="../../index.html" data-alt-hash="grails"><span class="number">1.</span>Grails入門</a></li>
+          <li class="numbered visible">
+            <a href="../../helloworld/index.html" data-alt-hash="helloworld"><span class="number">2.</span>まずはHelloWorld</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="../../helloworld/create-project.html" data-alt-hash="grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</a>
+                <ul>
+                  <li class="numbered visible"><a href="../../helloworld/create-project.html#id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</a></li>
+                  <li class="numbered visible"><a href="../../helloworld/create-project.html#id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</a></li>
+                </ul>
+              </li>
+              <li class="numbered visible"><a href="../../helloworld/controller.html" data-alt-hash="id-acbc3bedce5152ebd29de7e6ea168842ec7e897a"><span class="number">2.2.</span>コントローラの作成</a></li>
+              <li class="numbered visible"><a href="../../helloworld/view.html" data-alt-hash="id-a2487187369f0d3d2cf4d1a3cbf3dd40fcf32c02"><span class="number">2.3.</span>ビューの作成</a></li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="../../tutorials/index.html" data-alt-hash="id-0e61d402aa4591d732bd45853c4a77e68b24621e"><span class="number">3.</span>チュートリアル集</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="../../tutorials/todo-application/index.html" data-alt-hash="todo"><span class="number">3.1.</span>ToDoアプリケーション</a>
+                <ul>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/preparation.html" data-alt-hash="id-5be5cb5c47435369bea367333779ccc36510813c"><span class="number">3.1.1.</span>準備</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/form.html" data-alt-hash="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.1.2.</span>フォームでデータを送信</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.1.3.</span>データを保存する</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/domain.html#scaffold"><span class="number">3.1.4.</span>Scaffold</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/domain.html#id-6cfef1fc476d3f5c4c7d265db4f72c5cd23c1c52"><span class="number">3.1.5.</span>保存したデータの表示</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.1.6.</span>フォームのデータを保存</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/delete.html" data-alt-hash="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.1.7.</span>データの削除</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/edit.html" data-alt-hash="id-1f8b5b4047f10e94405a71ee14e2ab2003a52e15"><span class="number">3.1.8.</span>データの編集</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/service.html" data-alt-hash="db"><span class="number">3.1.9.</span>DBの更新をトランザクショショナルにする</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="../index.html" data-alt-hash="id-427e87e11f2aee5d1161c1d76a4b55d46588413c"><span class="number">4.</span>ドキュメント</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="index.html" data-alt-hash="asset-pipeline"><span class="number">4.1.</span>Asset Pipeline</a>
+                <ul>
+                  <li class="numbered visible">
+                    <a href="index.html#id-ebd0ff08cca5ebe0ad7169962654f72a442061d6"><span class="number">4.1.1.</span>概要</a>
+                    <ul>
+                      <li class="numbered invisible"><a href="index.html#id-1ab64cd5bb217128139179796e1c61abc410b161"><span class="number">4.1.1.1.</span>設置場所</a></li>
+                      <li class="numbered invisible"><a href="index.html#id-f11fddc3e47086907039858b901b676c1c5fe38e"><span class="number">4.1.1.2.</span>利用方法</a></li>
+                    </ul>
+                  </li>
+                  <li class="numbered visible">
+                    <a href="index.html#id-6f046867420f35268da0abb04fa3a35cd6dcab32"><span class="number">4.1.2.</span>チュートリアル</a>
+                    <ul>
+                      <li class="numbered invisible">
+                        <a href="index.html#javascript"><span class="number">4.1.2.1.</span>JavaScript</a>
+                        <ul>
+                          <li class="unnumbered invisible"><a href="index.html#id-a4050ecaffba9d3e473d84f45140acebb7fe6ef7">基本</a></li>
+                          <li class="unnumbered invisible"><a href="index.html#id-bb6e68229aa0c3c61a0eaf2bac315b1bf044e3e4">サブディレクトリの作成とJavaScriptファイルの分割</a></li>
+                          <li class="unnumbered invisible"><a href="index.html#id-a6e384bb6a5890ddc15e44e4bd317bcb8397cb9e">詳細</a></li>
+                        </ul>
+                      </li>
+                      <li class="numbered invisible">
+                        <a href="index.html#css"><span class="number">4.1.2.2.</span>CSS</a>
+                        <ul>
+                          <li class="unnumbered invisible"><a href="index.html#id-ebd7b5a621733f87668affb42069fecf6c024265">サブディレクトリの作成とCSSファイルの分割</a></li>
+                        </ul>
+                      </li>
+                      <li class="numbered invisible"><a href="index.html#id-94cf9568fa7973c1b90cc1259d25ab6af608251a"><span class="number">4.1.2.3.</span>画像</a></li>
+                    </ul>
+                  </li>
+                  <li class="numbered visible"><a href="index.html#id-e49b0de846c28f64cd8ee8ff7ba1e9c487dddb0e"><span class="number">4.1.3.</span>外部ライブラリの利用</a></li>
+                  <li class="numbered visible"><a href="index.html#id-acb710a5dd7d3b68c3d1fcbd0e8768b3f3572803"><span class="number">4.1.4.</span>まとめ</a></li>
+                  <li class="numbered visible"><a href="index.html#id-23e780fb4a19e40daf49f001ef42773db2f03876"><span class="number">4.1.5.</span>参考</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="content-handle"></div>
+        <div class="content-container">
+          <div class="content-nav content-nav-top">
+            <a class="prev-page" href="../index.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">4.</span>
+            ドキュメント
+            </a>
+          </div>
+          <div class="page-toc">
+            <ul>
+              <li class="numbered visible">
+                <a href="#asset-pipeline"><span class="number">4.1.</span>Asset Pipeline</a>
+                <ul>
+                  <li class="numbered visible">
+                    <a href="#id-ebd0ff08cca5ebe0ad7169962654f72a442061d6"><span class="number">4.1.1.</span>概要</a>
+                    <ul>
+                      <li class="numbered visible"><a href="#id-1ab64cd5bb217128139179796e1c61abc410b161"><span class="number">4.1.1.1.</span>設置場所</a></li>
+                      <li class="numbered visible"><a href="#id-f11fddc3e47086907039858b901b676c1c5fe38e"><span class="number">4.1.1.2.</span>利用方法</a></li>
+                    </ul>
+                  </li>
+                  <li class="numbered visible">
+                    <a href="#id-6f046867420f35268da0abb04fa3a35cd6dcab32"><span class="number">4.1.2.</span>チュートリアル</a>
+                    <ul>
+                      <li class="numbered visible">
+                        <a href="#javascript"><span class="number">4.1.2.1.</span>JavaScript</a>
+                        <ul>
+                          <li class="unnumbered visible"><a href="#id-a4050ecaffba9d3e473d84f45140acebb7fe6ef7">基本</a></li>
+                          <li class="unnumbered visible"><a href="#id-bb6e68229aa0c3c61a0eaf2bac315b1bf044e3e4">サブディレクトリの作成とJavaScriptファイルの分割</a></li>
+                          <li class="unnumbered visible"><a href="#id-a6e384bb6a5890ddc15e44e4bd317bcb8397cb9e">詳細</a></li>
+                        </ul>
+                      </li>
+                      <li class="numbered visible">
+                        <a href="#css"><span class="number">4.1.2.2.</span>CSS</a>
+                        <ul>
+                          <li class="unnumbered visible"><a href="#id-ebd7b5a621733f87668affb42069fecf6c024265">サブディレクトリの作成とCSSファイルの分割</a></li>
+                        </ul>
+                      </li>
+                      <li class="numbered visible"><a href="#id-94cf9568fa7973c1b90cc1259d25ab6af608251a"><span class="number">4.1.2.3.</span>画像</a></li>
+                    </ul>
+                  </li>
+                  <li class="numbered visible"><a href="#id-e49b0de846c28f64cd8ee8ff7ba1e9c487dddb0e"><span class="number">4.1.3.</span>外部ライブラリの利用</a></li>
+                  <li class="numbered visible"><a href="#id-acb710a5dd7d3b68c3d1fcbd0e8768b3f3572803"><span class="number">4.1.4.</span>まとめ</a></li>
+                  <li class="numbered visible"><a href="#id-23e780fb4a19e40daf49f001ef42773db2f03876"><span class="number">4.1.5.</span>参考</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="main-content">
+            <h2 id="asset-pipeline"><span class="number">4.1.</span>Asset Pipeline</h2>
+            <p>G*Advent Calendar(Groovy,Grails,Gradle,Spock&hellip;) Advent Calendar 2016 6日目の記事です。<br/>前日 -&gt; <a href="http://qiita.com/h1romas4">@h1romas4さん</a><br/>翌日 -&gt; <a href="http://qiita.com/saba1024">私です</a> </p>
+            <h3 id="id-ebd0ff08cca5ebe0ad7169962654f72a442061d6"><span class="number">4.1.1.</span>概要</h3>
+            <p>Grails2.4から、JavaScriptやCSS、画像といったいわゆる静的なファイルは、 <strong>Asset Pipeline</strong> というプラグインを経由して利用するようになりました。<br/>大雑把にこのAsset-Pipelineのメリットをまとめると、 </p>
+            <ol>
+              <li>JavaScriptがさらに別のJavaScriptを読み込めるので、JavaScriptが追加になっても、GSPには手を加えなくてもOK。</li>
+              <li>CSSがさらに別のCSSを読み込めるので、CSSが追加になっても、GSPには手を加えなくてもOK。</li>
+              <li>Grailsアプリケーションのリリース時に、warやjarに固めた時点で、デフォルトで全て一つのJSファイル、CSSファイルにminifyしてくれる。</li>
+              <li>minifyする際にはファイル名にフィンガープリントが割り当てられるため、Webサーバなどでキャッシュを有効にさせていてもファイルの更新に問題がでない。</li>
+            </ol>
+            <p>というようなメリットが挙げられます。<br/>開発時点では、 <strong>共通のJavaScript、CSSファイルをそれぞれ用意しておき、それ以外のJavaScript/CSSファイルはそれぞれその共通のファイルから読み込む</strong> ようにしておけば、アプリケーションに大量に存在しているであろうGSPファイルに態々<code>&lt;script type=&quot;text/javascript&quot; src=&quot;hoge.js&quot;&gt;&lt;/script&gt;</code>や、<code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;piyo.css&quot;&gt;</code>を毎回追加する必要がなくなります。これは非常に楽ですね！<br/>本番環境でのメリットも当然有って、minfyされるわけですので <strong>クライアントへの応答時間の高速化</strong> 、さらに <strong>安心してブラウザにキャッシュ</strong> させることができます。 </p>
+            <h4 id="id-1ab64cd5bb217128139179796e1c61abc410b161"><span class="number">4.1.1.1.</span>設置場所</h4>
+            <p>特に難しいことは何もありせん。JavaScriptもCSSも画像も、全部普通のものです。<br/>それらを決まったディレクトリに配置してあげます。 </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>種類</th>
+                  <th>設置場所</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>JavaScript</td>
+                  <td><code>grails-app/assets/javascripts/</code></td>
+                </tr>
+                <tr>
+                  <td>CSS</td>
+                  <td><code>grails-app/assets/stylesheets/</code></td>
+                </tr>
+                <tr>
+                  <td>画像</td>
+                  <td><code>grails-app/assets/images/</code></td>
+                </tr>
+              </tbody>
+            </table>
+            <p>つまり、GrailsでのWebアプリケーション開発ではJavaScript、CSS、画像は基本的に全てこの<code>grails-app/assets/</code>の下に置くことになります。 </p>
+            <p>実際にGrails (3.2.3) で新規にアプリケーションを作成した場合の<code>grails-app/assets</code>を見てみると以下のようになっています。 </p>
+            <pre><code class="nohighlight">assets
+├── images
+│   ├── apple-touch-icon-retina.png
+│   ├── apple-touch-icon.png
+│   ├── favicon.ico
+│   ├── grails-cupsonly-logo-white.svg
+│   ├── skin
+│   │   ├── database_add.png
+│   │   ├── database_delete.png
+│   │   ├── database_edit.png
+│   │   ├── database_save.png
+│   │   ├── database_table.png
+│   │   ├── exclamation.png
+│   │   ├── house.png
+│   │   ├── information.png
+│   │   ├── shadow.jpg
+│   │   ├── sorted_asc.gif
+│   │   └── sorted_desc.gif
+│   └── spinner.gif
+├── javascripts
+│   ├── application.js
+│   ├── bootstrap.js
+│   └── jquery-2.2.0.min.js
+└── stylesheets
+    ├── application.css
+    ├── bootstrap.css
+    ├── errors.css
+    ├── grails.css
+    ├── main.css
+    └── mobile.css
+
+4 directories, 25 files
+</code></pre>
+            <p>ちゃんとそれぞれのディレクトリにファイルが分けられて設置されいますね。 </p>
+            <h4 id="id-f11fddc3e47086907039858b901b676c1c5fe38e"><span class="number">4.1.1.2.</span>利用方法</h4>
+            <p>まず、<code>grails-app/assets/javascripts/application.js</code>（JavaScript）の中身を見てみます。 </p>
+            <pre><code class="javascript">// This is a manifest file that&#39;ll be compiled into application.js.
+//
+// Any JavaScript file within this directory can be referenced here using a relative path.
+//
+// You&#39;re free to add application-wide JavaScript to this file, but it&#39;s generally better
+// to create separate JavaScript files as needed.
+//
+//= require jquery-2.2.0.min
+//= require bootstrap
+//= require_tree .
+//= require_self
+if (typeof jQuery !== &#39;undefined&#39;) {
+    (function($) {
+        $(document).ajaxStart(function() {
+            $(&#39;#spinner&#39;).fadeIn();
+        }).ajaxStop(function() {
+            $(&#39;#spinner&#39;).fadeOut();
+        });
+    })(jQuery);
+}
+</code></pre>
+            <p>次に<code>grails-app/assets/stylesheets/application.css</code>（CSS)を見てみます。 </p>
+            <pre><code class="css">/*
+* This is a manifest file that&#39;ll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You&#39;re free to add application-wide styles to this file and they&#39;ll appear at the top of the
+* compiled file, but it&#39;s generally better to create a new file per style scope.
+*
+*= require bootstrap
+*= require grails
+*= require main
+*= require mobile
+*= require_self
+*/
+</code></pre>
+            <p>両方ただのJavaScriptとCSSファイルですね。 </p>
+            <p>ココで１点注目なのが、それぞれのファイルのコメントです。<br/>JavaScriptだと </p>
+            <pre><code class="javascript">//=
+</code></pre>
+            <p>で始まっている部分、<br/>CSSだと </p>
+            <pre><code class="css">*=
+</code></pre>
+            <p>で始まっている部分です。 </p>
+            <p>実はこの部分は特殊なコメントで、 <strong>ディレクティブ</strong> と呼ばれる部分です。<br/>このディレクティブを使うことで、このファイルに、ディレクティブに指定したJavaScript/CSSを読み込むことが出来ます。<br/>ディレクティブの書き方はJavaScript、CSS共通で、以下の種類の物があります。 </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>ディレクティブ </th>
+                  <th>意味 </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>require </td>
+                  <td>相対パスで指定したJavaScript/CSSファイルを読み込む</td>
+                </tr>
+                <tr>
+                  <td>require_tree </td>
+                  <td>相対パスでディレクトリを指定する。するとその配下のJavaScript/CSSファイルを全て読み込んでくれる。 </td>
+                </tr>
+                <tr>
+                  <td>require_self </td>
+                  <td>自分自身のファイル。</td>
+                </tr>
+                <tr>
+                  <td>encoding </td>
+                  <td>文字コード</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><code>require</code>に指定するJavaScriptやCSSファイルは、拡張子を指定しなくてもOKです。（指定してもOK） </p>
+            <p>つまり、<code>application.js</code>の場合、<code>jquery-2.2.0.min.js</code>、<code>bootstrap.js</code>を、<br/><code>application.css</code>の場合<code>bootstrap.css</code>、<code>grails.css</code>、<code>main.csss</code>、<code>mobile.css</code><br/>をそれぞれ読み込むようになっています。 </p>
+            <p>そしてこれらのファイルを利用するには、GSPファイルで以下のように指定します。 </p>
+            <pre><code class="html">&lt;head&gt;
+    &lt;asset:stylesheet src=&quot;application.css&quot; /&gt;
+    &lt;asset:javascript src=&quot;application.js&quot; /&gt;
+    &lt;title&gt;Hello&lt;/title&gt;
+&lt;/head&gt;
+</code></pre>
+            <p>このように記述するだけで、そのGSPファイルには自動的に上記で記した複数のJavaScriptファイルとCSSファイルが読み込まれるようになります。 </p>
+            <p>ちなみに、ディレクティブのうち<code>require_self</code>が少しわかりにくいですね。<br/>これは、自分自身を表すディレクティブ、つまり今回の場合だと<code>application.js</code>と<code>application.css</code>になります。<br/>この<code>require_self</code>を利用することで、自分自身が読み込まれる（HTML上で現れる）順番を制御することが出来ます。 </p>
+            <p>つまり、 </p>
+            <pre><code class="javascript">//= hoge
+//= require_self
+</code></pre>
+            <p>の場合、HTML的には </p>
+            <pre><code class="html">&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/hoge.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/application.js?compile=false&quot; &gt;&lt;/script&gt;
+</code></pre>
+            <p>という順番で読み込まれ、 </p>
+            <pre><code class="javascript">//= require_self
+//= hoge
+</code></pre>
+            <p>の場合、HTML的には </p>
+            <pre><code class="html">&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/application.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/hoge.js?compile=false&quot; &gt;&lt;/script&gt;```
+</code></pre>
+            <p>となります。CSSでも同じ動作です。 JavaScriptで関数が先に宣言されている必要がある場合など、読み込まれる順番を制御したい場合に利用します。 </p>
+            <h3 id="id-6f046867420f35268da0abb04fa3a35cd6dcab32"><span class="number">4.1.2.</span>チュートリアル</h3>
+            <p>まず、以下のようなGSPを用意します。 </p>
+            <pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Hello&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello Asset-Pipeline&lt;/h1&gt;
+&lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;title&quot;&gt;GrailsとAsset-Pipeline&lt;/p&gt;
+    &lt;p class=&quot;description&quot;&gt;この組み合わせは最強&lt;/p&gt;
+&lt;/div&gt;
+&lt;button id=&quot;like-button&quot;&gt;イイね！&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>この状態でGSPにアクセスすると以下のようになります。 </p>
+            <p><img src="images/1.png" alt="1"/></p>
+            <p>普通ですね。<br/>では、実際にAsset-pipelineを操作してみましょう！ </p>
+            <h4 id="javascript"><span class="number">4.1.2.1.</span>JavaScript</h4>
+            <h5 id="id-a4050ecaffba9d3e473d84f45140acebb7fe6ef7">基本</h5>
+            <p>画面上に <strong>イイね！</strong>ボタンがありますが、まだ押しても何も起きません。<br/>このボタンに動作を追加してみます。</p>
+            <p><code>grails-app/assets/javascripts/application.js</code>というファイルを以下のように修正します。 </p>
+            <pre><code class="javascript">// This is a manifest file that&#39;ll be compiled into application.js.
+//
+// Any JavaScript file within this directory can be referenced here using a relative path.
+//
+// You&#39;re free to add application-wide JavaScript to this file, but it&#39;s generally better
+// to create separate JavaScript files as needed.
+//
+//= require jquery-2.2.0.min
+//= require bootstrap
+//= require_tree .
+//= require_self
+
+if (typeof jQuery !== &#39;undefined&#39;) {
+    (function($) {
+        $(document).ajaxStart(function() {
+            $(&#39;#spinner&#39;).fadeIn();
+        }).ajaxStop(function() {
+            $(&#39;#spinner&#39;).fadeOut();
+        });
+    })(jQuery);
+}
+
+// -------------------------------------------
+// 以下を追加
+// -------------------------------------------
+$(function(){
+    $(&#39;#like-button&#39;).click(function(){
+        alert(&quot;Grails良いよね！！&quot;)
+    });
+});
+</code></pre>
+            <p>そして、GSPのheadタグの中に </p>
+            <pre><code class="html">&lt;asset:javascript src=&quot;application.js&quot; /&gt;
+</code></pre>
+            <p>を追加して、このJavaScriptファイルをAsset Pipeline経由で読み込みます。 </p>
+            <p>これで、ページを更新して、 <strong>イイね！</strong> をクリックするとポップアップが表示されるようになりました。<br/>ちゃんとAsset Pipeline経由でJavaScriptが利用できましたね！ </p>
+            <p>ただ、このままだとこの<code>application.js</code>がどんどん肥大化していってしまいますよね。<br/>当然Asset Pipeline経由でもちゃんとサブディレクトリなどを作ってJavaScriptを整理することが出来ます。 </p>
+            <h5 id="id-bb6e68229aa0c3c61a0eaf2bac315b1bf044e3e4">サブディレクトリの作成とJavaScriptファイルの分割</h5>
+            <p>では、<code>grails-app/assets/javascripts/</code>の中に、<code>my-js</code>というディレクトリを作り、<code>my-original.js</code>というJavaScriptファイルを作成します。<br/>その中に先ほど<code>application.js</code>に追記した処理を移します。 </p>
+            <p><code>grails-app/assets/javascripts/my-js/my-original.js</code></p>
+            <pre><code class="javascript">$(function(){
+    $(&#39;#like-button&#39;).click(function(){
+        alert(&quot;Grails良いよね！！(移動したよ)&quot;)
+    });
+});
+</code></pre>
+            <p>では、再度画面をリフレッシュして <strong>イイね！</strong> ボタンをクリックしてみてください。<br/>ちゃんと今回作成したJavaScriptが実行されていることが解ると思います。 </p>
+            <h5 id="id-a6e384bb6a5890ddc15e44e4bd317bcb8397cb9e">詳細</h5>
+            <p>ここで一つ疑問があります。それは、 </p>
+            <p><strong>application.jsはもちろん、GSPにも先ほど追加したmy-js/my-original.jsについて記述していないのに、なぜそのJavaScriptファイルが有効になったのか？</strong><br/>という点です。<br/>これは何故かというと、<code>application.js</code>には<code>//= require_tree .</code>と記述されれているので、<code>application.js</code>と <strong>同じディレクトリにあるJavaScriptファイルを、再帰的に全て自動で読み込んでくれるようになっているため</strong> です。<br/>つまり、今回追加した<code>my-js/my-original.js</code>も、ちゃんと仕様通り<code>application.js</code>から読み込まれているわけですね。<br/>当然<code>require_tree</code>の代わりに<code>require</code>を使って全てのJavaScriptを指定することも出来ます。<br/>少し面倒にはなりますが、<code>require</code>を使うことで読み込むJavaScriptファイルの順番を制御することが出来ます。 </p>
+            <p>ではさらにテストとして、以下のようにディレクトリをJavaScriptファイルを用意します。 </p>
+            <pre><code class="bash">assets/javascripts/my-js
+├── hoge
+│   ├── hoge1.js
+│   ├── hoge2.js
+│   └── piyo
+│       └── hoge-piyo.js
+└── my-original.js
+</code></pre>
+            <p>各JavaScriptファイルは単純にそのJavaScriptファイル名を出力する<code>console.log(&quot;This is hoge1.js&quot;);</code>のような記述しています。<br/>（<code>my-original.js</code>にも末尾に追加してください） </p>
+            <p>できたら、さっそく画面をリフレッシュしてください。<br/>console.logを使っていますので、JavaScriptのデバッグコンソールなどで結果を確認すると、 </p>
+            <pre><code class="nohighlight">This is hoge1.js
+This is hoge2.js
+This is hoge-piyo.js
+This is my-original.js
+</code></pre>
+            <p>と出力されます。<br/>なんと！<code>application.js</code>もGSPも全くいじってないのに、これだけ大量のJavaScriptファイルが簡単に読み込めました！ </p>
+            <p>このように、 <strong>Asset Pipelineを利用することで、簡単かつ一元的にJavaScriptを管理することが出来るようになり、本番環境へデプロイする際にはminify&amp;ユニークなファイル名に自動的にリネームしてくれます。</strong> </p>
+            <h4 id="css"><span class="number">4.1.2.2.</span>CSS</h4>
+            <p>では、CSSの方も試していきましょう。 </p>
+            <p><code>grails-app/assets/stylesheets/application.css</code>というファイルの中身を、以下のように修正します。 </p>
+            <pre><code class="css">/*
+* This is a manifest file that&#39;ll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You&#39;re free to add application-wide styles to this file and they&#39;ll appear at the top of the
+* compiled file, but it&#39;s generally better to create a new file per style scope.
+*
+*= require bootstrap
+*= require grails
+*= require main
+*= require mobile
+*= require_self
+*/
+
+/****** 以下を追加 ******/
+body {
+    padding:10px;
+    background-color: #cccccc;
+}
+h1 {
+    color: #337ab7;
+}
+
+.content .title {
+    font-weight: bold;
+}
+.content .description {
+    font-style: italic;
+}
+</code></pre>
+            <p>そして、GSPのheadタグの先頭に </p>
+            <pre><code class="html">&lt;asset:stylesheet src=&quot;application.css&quot; /&gt;
+</code></pre>
+            <p>を追加します。 </p>
+            <p>JavaScriptの場合とほとんど同じですね！<br/>違うところといえば、<code>application.css</code>で指定するディレクティブが<code>*= ディレククティブ名</code>になっているところだけですね。<br/>つまりは普通の<code>コメント= ディレクティブ名 ファイルのパス</code>というフォーマットになっているということですね。 </p>
+            <p>さて、これで画面をリフレッシュするとGSPにアクセスすると、以下のようにちゃんとCSSが反映されています。 </p>
+            <p><img src="images/2.png" alt="2"/></p>
+            <p>JavaScript同様ちゃんと記述したCSSが反映されていることが分かります。<br/>CSSの場合も、JavaScriptの場合と同じ方法でサブディレクトリを作成して読み込むことが出来ます。 </p>
+            <h5 id="id-ebd7b5a621733f87668affb42069fecf6c024265">サブディレクトリの作成とCSSファイルの分割</h5>
+            <p>JavaScriptの場合と全く同じです。<br/>なので、こちらも<code>grails-app/assets/stylesheets/my-css/my-original.css</code>という新しいファイルを作成して、先ほど<code>application.css</code>に追加したCSSを移動させます。 </p>
+            <p><code>grails-app/assets/stylesheets/my-css/my-original.css</code></p>
+            <pre><code class="css">body {
+    padding:10px;
+    background-color: #cccccc;
+}
+h1 {
+    color: #337ab7;
+}
+
+.content .title {
+    font-weight: bold;
+}
+.content .description {
+    font-style: italic;
+}
+</code></pre>
+            <p><code>grails-app/assets/stylesheets/application.css</code>に、追加したCSSの削除と、作成した上記のCSSファイルの読み込を追加します。 </p>
+            <pre><code class="css">/*
+* This is a manifest file that&#39;ll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You&#39;re free to add application-wide styles to this file and they&#39;ll appear at the top of the
+* compiled file, but it&#39;s generally better to create a new file per style scope.
+*
+*= require bootstrap
+*= require grails
+*= require main
+*= require mobile
+*= require_self
+*= require my-css/my-original
+*/
+</code></pre>
+            <p><code>*= require my-css/my-original</code>が読み込み部分です。<br/>では、これで画面をリフレッシュしてみてください。問題なくちゃんとCSSが反映されたままになっていることが確認できます。 </p>
+            <p>その他の<code>require_tree</code>などのディレクティブの使い方や動作も、JavaScriptの場合と全く同じです。<br/>ディレクティブに指定するCSSなどは、全て <strong>assets/stylesheetsディレクトリを起点とした相対パス</strong> になります。 </p>
+            <p>余談ですが、デフォルトで用意されている<code>application.css</code>には、<code>application.js</code>と違って<code>require_tree .</code>が指定されていないので、このように自分で読み込むCSSを追加してあげる必要があります。<br/>当然<code>require_tree .</code>を追加するのでもOKです！ </p>
+            <p>全てのHTML/GSPファイルで、<code>application.css</code>の用な共通のCSSを一つ読み込むようにしておけば、その共通のCSSに新しいCSSやCSSファイルを追加するだけで、全てのHTML/GSPにそれが反映されます。<br/>このように、 <strong>Asset Pipelineを利用することで、簡単かつ一元的にCSSを管理することが出来るようになり、本番環境へデプロイする際にはminify&amp;ユニークなファイル名に自動的にリネームしてくれます。</strong> </p>
+            <h4 id="id-94cf9568fa7973c1b90cc1259d25ab6af608251a"><span class="number">4.1.2.3.</span>画像</h4>
+            <p>画像ファイルについてもAsset Pipelineで管理できます。<br/>ただ、画像の場合はJavaScriptやCSSの様に、マニフェストファイルが存在しません。 </p>
+            <p>単純に<code>grails-app/assets/images</code>ディレクトリの下に画像を設置するだけです。<br/>そしてGSPから<code>&lt;asset:image src=&quot;...&quot; /&gt;</code>というタグで読み込むようにします。この際に指定するパスも、JavaScriptやCSS同様に、<code>assets/images</code>からの相対パスになります。 </p>
+            <p>実際に画像を表示してみましょう。<br/>GSPを以下のようにします。 </p>
+            <pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;asset:stylesheet src=&quot;application.css&quot; /&gt;
+    &lt;asset:javascript src=&quot;application.js&quot; /&gt;
+    &lt;title&gt;Hello&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello Asset-Pipeline&lt;/h1&gt;
+&lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;title&quot;&gt;GrailsとAsset-Pipeline&lt;/p&gt;
+    &lt;p class=&quot;description&quot;&gt;この組み合わせは最強&lt;/p&gt;
+&lt;/div&gt;
+&lt;button id=&quot;like-button&quot;&gt;イイね！&lt;/button&gt;
+
+&lt;!-- これを追加 --&gt;
+&lt;asset:image src=&quot;apple-touch-icon-retina.png&quot; class=&quot;img-size&quot;/&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>ついでなので、CSSで少しだけ画像の表示位置を調整します。 </p>
+            <p><code>assets/stylesheets/my-css/my-original.css</code></p>
+            <pre><code class="css">body {
+    padding:10px;
+    background-color: #cccccc;
+}
+h1 {
+    color: #337ab7;
+}
+
+.content .title {
+    font-weight: bold;
+}
+.content .description {
+    font-style: italic;
+}
+
+/* 画像表示位置の微調整用に以下を追加！ */
+.img-size {
+    display:block;
+    margin-top: 10px;
+    width:50px;
+}
+</code></pre>
+            <p>では、画面をリフレッシュしてみてください。最終的に以下のようになります。 </p>
+            <p><img src="images/3.png" alt="3"/></p>
+            <p>もし、<code>assets/images/hoge/piyo/test.jpg</code>といったサブディレクトリになっている場合も、別に特別なことはなく、 </p>
+            <pre><code class="nohighlight">&lt;asset:image src=&quot;hoge/piyo/test.jpg&quot; class=&quot;img-size&quot;/&gt;
+</code></pre>
+            <p>と指定すればOKです。 </p>
+            <h3 id="id-e49b0de846c28f64cd8ee8ff7ba1e9c487dddb0e"><span class="number">4.1.3.</span>外部ライブラリの利用</h3>
+            <p>例えば、ｊQuery-UIなどのJavaScriptやCSSライブラリ、そしてそれらが一緒になっている外部ライブラリを利用する方法を確認します。<br/>この場合は、特にルールは無いようですが、<code>assets</code>ディレクトリ配下に<code>vendor</code>というようなディレクトリを作成して、その中に外部ライブラリを配置して、<code>application.js</code>や<code>application.css</code>から必要なファイルを読み込むようにすれば動作します。<br/>例えば、最新版のｊQuery-UIをダウンロードしてきて、<code>grails-app/assets/vendor/jquery-ui-1.12.1</code>に設置します。 </p>
+            <pre><code class="nohighlight">assets
+├── images
+│     ...省略
+├── javascripts
+│     ...省略
+├── stylesheets
+│     ...省略
+└── vendor &lt;----このディレクトリを自分で作成した。別にvendorという名前じゃなくてもOK
+    └── jquery-ui-1.12.1 &lt;----ダウンロードしてきたjQuery-UIを解凍してそのままこのに設置しただけ
+        ├── AUTHORS.txt
+        ├── LICENSE.txt
+        ├── external
+        │   └── jquery
+        │       └── jquery.js
+        ├── images
+        │   ├── ui-icons_444444_256x240.png
+        │   ├── ui-icons_555555_256x240.png
+        │   ├── ui-icons_777620_256x240.png
+        │   ├── ui-icons_777777_256x240.png
+        │   ├── ui-icons_cc0000_256x240.png
+        │   └── ui-icons_ffffff_256x240.png
+        ├── index.html
+        ├── jquery-ui.css
+        ├── jquery-ui.js
+        ├── jquery-ui.min.css
+        ├── jquery-ui.min.js
+        ├── jquery-ui.structure.css
+        ├── jquery-ui.structure.min.css
+        ├── jquery-ui.theme.css
+        ├── jquery-ui.theme.min.css
+        └── package.json
+</code></pre>
+            <p>そして、<code>application.js</code>では</p>
+            <pre><code class="nohighlight">//= require jquery-ui-1.12.1/jquery-ui.js
+</code></pre>
+            <p>を、<code>applicaton.css</code>では</p>
+            <pre><code class="nohighlight">*= require jquery-ui-1.12.1/jquery-ui.css
+</code></pre>
+            <p>という感じで、 <strong>vendorディレクトリを省いた状態でパスを指定する</strong> ことで、外部ライブラリ（今回の例だとjQuery-UI）が利用できる状態になります。<br/>自分で追加した今回のvendorディレクトリに限らず、Asset Pipelineでは、 <strong>/assets直下のディレクトリは取り除かれます。</strong><br/>つまり、<code>assets/javascripts/a.js</code>と、<code>assets/stylesheets/a.css</code>、<code>asets/vendor/MyDirectory</code>は <strong>全て同じディレクトリに展開されることになります。</strong><br/>これは、その性質を利用したワークアラウンドになります。 </p>
+            <p>では、追加したｊQuery-UIを利用して、DatePickerを利用してみます。 </p>
+            <pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;asset:stylesheet src=&quot;application.css&quot; /&gt;
+    &lt;asset:javascript src=&quot;application.js&quot; /&gt;
+    &lt;title&gt;Hello&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello Asset-Pipeline&lt;/h1&gt;
+&lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;title&quot;&gt;GrailsとAsset-Pipeline&lt;/p&gt;
+    &lt;p class=&quot;description&quot;&gt;この組み合わせは最強&lt;/p&gt;
+&lt;/div&gt;
+&lt;button id=&quot;like-button&quot;&gt;イイね！&lt;/button&gt;
+
+
+&lt;asset:image src=&quot;apple-touch-icon-retina.png&quot; class=&quot;img-size&quot;/&gt;
+&lt;!-- これを追加（DatePicker） --&gt;
+&lt;p&gt;Date: &lt;input type=&quot;text&quot; id=&quot;datepicker&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>1行<code>&lt;p&gt;Date: &lt;input type=&quot;text&quot; id=&quot;datepicker&quot;&gt;&lt;/p&gt;</code>を追加したのみですね。<br/>それでは、JavaScript側でこのテキストエリアがクリックされた際の挙動（DatePickerの表示）を追加します。<br/>今回は<code>grails-app/assets/javascripts/my-js/my-original.js</code>に追加します。 </p>
+            <pre><code class="javascript">$(function(){
+    $(&#39;#like-button&#39;).click(function(){
+        alert(&quot;Grails良いよね！！(移動したよ)&quot;)
+    });
+
+    // これを追加。
+    // これでテキストエリアをクリックするとカレンダーがポップアップされるようになる。
+    $(function(){
+        $( &quot;#datepicker&quot; ).datepicker();
+    });
+});
+
+console.log(&quot;This is my-original.js&quot;);
+</code></pre>
+            <p>これでOKです！実際に画面をリフレッシュしてテキストエリアをクリックすると、DatePickerが表示されます。 </p>
+            <p><img src="images/4.png" alt="4"/></p>
+            <p>このように、Asset Pipelineが標準で用意しているディレクトリの他に、外部のライブラリのディレクトリをそのまま利用することも可能です。 </p>
+            <h3 id="id-acb710a5dd7d3b68c3d1fcbd0e8768b3f3572803"><span class="number">4.1.4.</span>まとめ</h3>
+            <p>今回のチュートリアルを通して作成されたGSPは以下のようになっています。 </p>
+            <pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+&lt;asset:stylesheet src=&quot;application.css&quot; /&gt;
+&lt;asset:javascript src=&quot;application.js&quot; /&gt;
+&lt;title&gt;Hello&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello Asset-Pipeline&lt;/h1&gt;
+&lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;title&quot;&gt;GrailsとAsset-Pipeline&lt;/p&gt;
+    &lt;p class=&quot;description&quot;&gt;この組み合わせは最強&lt;/p&gt;
+&lt;/div&gt;
+&lt;button id=&quot;like-button&quot;&gt;イイね！&lt;/button&gt;
+
+&lt;!-- これを追加 --&gt;
+&lt;asset:image src=&quot;apple-touch-icon-retina.png&quot; class=&quot;img-size&quot;/&gt;
+&lt;p&gt;Date: &lt;input type=&quot;text&quot; id=&quot;datepicker&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>そして、上記のGSPからブラウザに返されたHTMLは以下のようになっています。 </p>
+            <pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/bootstrap.css?compile=false&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/grails.css?compile=false&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/main.css?compile=false&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/mobile.css?compile=false&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/application.css?compile=false&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/my-css/my-original.css?compile=false&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/jquery-ui-1.12.1/jquery-ui.css?compile=false&quot; /&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/jquery-2.2.0.min.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/bootstrap.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/application.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/my-js/hoge/hoge1.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/my-js/hoge/hoge2.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/my-js/hoge/piyo/hoge-piyo.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/my-js/my-original.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/sample.js?compile=false&quot; &gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/assets/jquery-ui-1.12.1/jquery-ui.js?compile=false&quot; &gt;&lt;/script&gt;
+
+&lt;title&gt;Hello&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello Asset-Pipeline&lt;/h1&gt;
+&lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;title&quot;&gt;GrailsとAsset-Pipeline&lt;/p&gt;
+    &lt;p class=&quot;description&quot;&gt;この組み合わせは最強&lt;/p&gt;
+&lt;/div&gt;
+&lt;button id=&quot;like-button&quot;&gt;イイね！&lt;/button&gt;
+
+&lt;!-- これを追加 --&gt;
+&lt;img src=&quot;/assets/apple-touch-icon-retina.png&quot; class=&quot;img-size&quot;/&gt;
+&lt;p&gt;Date: &lt;input type=&quot;text&quot; id=&quot;datepicker&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>JavaScriptやCSSが大量に読み込まれていますね。<br/>Asset Pipelineを利用することで、例えばこれらのファイルの内１つのファイル名をリネームした場合は、全てのHTML/GSPファイルをチェックして書き換えて。。。という手間を省くことが出来るようになります。</p>
+            <h3 id="id-23e780fb4a19e40daf49f001ef42773db2f03876"><span class="number">4.1.5.</span>参考</h3>
+            <p><a href="http://plugins.grails.org/plugin/asset-pipeline-grails">Grailsポータル上のプラグイン情報</a><br/><a href="https://github.com/bertramdev/asset-pipeline">Github</a></p>
+          </div>
+          <div class="content-nav content-nav-bottom">
+            <a class="prev-page" href="../index.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">4.</span>
+            ドキュメント
+            </a>
+          </div>
+          <div class="footer">
+            <p class="credit text-muted">Powered by <a href="https://github.com/kobo/gaiden">Gaiden</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../js/jquery-2.1.1.min.js"></script>
+    <script src="../../js/highlight.js"></script>
+    <script src="../../js/application.js"></script>
+    <script src="../../js/my.js"></script>
+  </body>
+</html>
