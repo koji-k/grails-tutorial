@@ -9,7 +9,8 @@ JVM上で動く動的プログラミング言語[Apache Groovy](http://groovy-la
 
 
 ```
-2016/12/05 Asset Pipelineに関するページを追加
+2016/12/07 ES6とSCSSに関するページを追加
+2016/12/06 Asset Pipelineに関するページを追加
 2016/10/07 公開方法をgh-pagesブランチからmasterブランチのdocsに変更
 2016/07/14 Todoアプリケーションに削除と編集についてを追加
 2016/07/11 ToDoアプリケーション追加

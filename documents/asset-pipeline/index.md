@@ -2,7 +2,7 @@
 
 G*Advent Calendar(Groovy,Grails,Gradle,Spock...) Advent Calendar 2016 6日目の記事です。  
 前日 -> [@h1romas4さん](http://qiita.com/h1romas4)  
-翌日 -> [私です](http://qiita.com/saba1024)  
+翌日 -> [私です。GrailsでのES6とSCSSについて書きます](additional.html)  
 
 ## 概要
 

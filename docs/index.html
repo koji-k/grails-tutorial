@@ -99,6 +99,15 @@
                   <li class="numbered visible"><a href="documents/asset-pipeline/index.html#id-23e780fb4a19e40daf49f001ef42773db2f03876"><span class="number">4.1.5.</span>参考</a></li>
                 </ul>
               </li>
+              <li class="numbered visible">
+                <a href="documents/asset-pipeline/additional.html" data-alt-hash="es6scss"><span class="number">4.2.</span>ES6とSCSS</a>
+                <ul>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/additional.html#es6javascript2015"><span class="number">4.2.1.</span>ES6(JavaScript2015)</a></li>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/additional.html#sassscss"><span class="number">4.2.2.</span>SASS/SCSS</a></li>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/additional.html#id-5dfe8713629f941f60d67108ca653f4564ef79f6"><span class="number">4.2.3.</span>まとめ</a></li>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/additional.html#id-d5b597c8222544d2965037a18b6803f596a4ab38"><span class="number">4.2.4.</span>参考</a></li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
@@ -122,7 +131,8 @@
             <h1 id="grails"><span class="number">1.</span>Grails入門</h1>
             <p>JVM上で動く動的プログラミング言語<a href="http://groovy-lang.org/">Apache Groovy</a>用のフルスタックなWebフレームワーク <a href="https://grails.org/"><strong>Grails</strong></a> の入門用サイトです。 </p>
             <p>このサイトは<a href="https://twitter.com/saba1024">@saba1024</a>が個人的に作成しているものです。<br/>問題等ございましたら優しくお知らせください。<br/>また、チュートリアルとしてTodoアプリを作成して行きますが、Grailsで重要な機能や知識なども別途記載していきますので、Grailsの入門としても活用できるようにしていく予定です。<br/><a href="http://koji-k.github.io/groovy-tutorial/">Apache Groovyのチュートリアルも有ります。</a></p>
-            <pre><code class="nohighlight">2016/12/05 Asset Pipelineに関するページを追加
+            <pre><code class="nohighlight">2016/12/07 ES6とSCSSに関するページを追加
+2016/12/06 Asset Pipelineに関するページを追加
 2016/10/07 公開方法をgh-pagesブランチからmasterブランチのdocsに変更
 2016/07/14 Todoアプリケーションに削除と編集についてを追加
 2016/07/11 ToDoアプリケーション追加
@@ -145,5 +155,13 @@
     <script src="js/highlight.js"></script>
     <script src="js/application.js"></script>
     <script src="js/my.js"></script>
+    <script>
+      if (window.WebSocket) {
+        var socket = new WebSocket("ws://localhost:51556/");
+        socket.onmessage = function () {
+          location.reload();
+        };
+      }
+    </script>
   </body>
 </html>

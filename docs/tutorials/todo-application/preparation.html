@@ -99,6 +99,15 @@
                   <li class="numbered visible"><a href="../../documents/asset-pipeline/index.html#id-23e780fb4a19e40daf49f001ef42773db2f03876"><span class="number">4.1.5.</span>参考</a></li>
                 </ul>
               </li>
+              <li class="numbered visible">
+                <a href="../../documents/asset-pipeline/additional.html" data-alt-hash="es6scss"><span class="number">4.2.</span>ES6とSCSS</a>
+                <ul>
+                  <li class="numbered visible"><a href="../../documents/asset-pipeline/additional.html#es6javascript2015"><span class="number">4.2.1.</span>ES6(JavaScript2015)</a></li>
+                  <li class="numbered visible"><a href="../../documents/asset-pipeline/additional.html#sassscss"><span class="number">4.2.2.</span>SASS/SCSS</a></li>
+                  <li class="numbered visible"><a href="../../documents/asset-pipeline/additional.html#id-5dfe8713629f941f60d67108ca653f4564ef79f6"><span class="number">4.2.3.</span>まとめ</a></li>
+                  <li class="numbered visible"><a href="../../documents/asset-pipeline/additional.html#id-d5b597c8222544d2965037a18b6803f596a4ab38"><span class="number">4.2.4.</span>参考</a></li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
@@ -191,5 +200,13 @@ src/test/groovy/mytodo/IndexControllerSpec.groovy
     <script src="../../js/highlight.js"></script>
     <script src="../../js/application.js"></script>
     <script src="../../js/my.js"></script>
+    <script>
+      if (window.WebSocket) {
+        var socket = new WebSocket("ws://localhost:51556/");
+        socket.onmessage = function () {
+          location.reload();
+        };
+      }
+    </script>
   </body>
 </html>

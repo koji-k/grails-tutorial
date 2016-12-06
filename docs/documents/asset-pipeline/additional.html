@@ -1,0 +1,334 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>4.2. ES6とSCSS - Grailsチュートリアル</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/my.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-84847594-1', 'auto');
+      ga('send', 'pageview');
+      
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <i class="fa fa-bars sidebar-toggle"></i>
+        <span class="title"><a href="../../index.html">Grailsチュートリアル</a></span>
+      </div>
+      <div class="sidebar">
+        <ul>
+          <li class="numbered visible"><a href="../../index.html" data-alt-hash="grails"><span class="number">1.</span>Grails入門</a></li>
+          <li class="numbered visible">
+            <a href="../../helloworld/index.html" data-alt-hash="helloworld"><span class="number">2.</span>まずはHelloWorld</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="../../helloworld/create-project.html" data-alt-hash="grails"><span class="number">2.1.</span>Grailsアプリケーションの作成</a>
+                <ul>
+                  <li class="numbered visible"><a href="../../helloworld/create-project.html#id-7e850f557651bee63cf2cd768cad0863576ed782"><span class="number">2.1.1.</span>アプリケーションを作成</a></li>
+                  <li class="numbered visible"><a href="../../helloworld/create-project.html#id-c7991f84a45f745293d1d3cb1ae1654103aa59b8"><span class="number">2.1.2.</span>Grailsの起動</a></li>
+                </ul>
+              </li>
+              <li class="numbered visible"><a href="../../helloworld/controller.html" data-alt-hash="id-acbc3bedce5152ebd29de7e6ea168842ec7e897a"><span class="number">2.2.</span>コントローラの作成</a></li>
+              <li class="numbered visible"><a href="../../helloworld/view.html" data-alt-hash="id-a2487187369f0d3d2cf4d1a3cbf3dd40fcf32c02"><span class="number">2.3.</span>ビューの作成</a></li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="../../tutorials/index.html" data-alt-hash="id-0e61d402aa4591d732bd45853c4a77e68b24621e"><span class="number">3.</span>チュートリアル集</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="../../tutorials/todo-application/index.html" data-alt-hash="todo"><span class="number">3.1.</span>ToDoアプリケーション</a>
+                <ul>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/preparation.html" data-alt-hash="id-5be5cb5c47435369bea367333779ccc36510813c"><span class="number">3.1.1.</span>準備</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/form.html" data-alt-hash="id-79447e651302f60a2e9534b04db2819a380e0f72"><span class="number">3.1.2.</span>フォームでデータを送信</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/domain.html" data-alt-hash="id-97641bee0ab7bfd76f3025bf207ef29a72bfa7c2"><span class="number">3.1.3.</span>データを保存する</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/domain.html#scaffold"><span class="number">3.1.4.</span>Scaffold</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/domain.html#id-6cfef1fc476d3f5c4c7d265db4f72c5cd23c1c52"><span class="number">3.1.5.</span>保存したデータの表示</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/form2.html" data-alt-hash="id-79dd93e6699e16a5dda1a0268b0bf0bdf28b0fa0"><span class="number">3.1.6.</span>フォームのデータを保存</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/delete.html" data-alt-hash="id-490699bbc9a9fc9e227db974a80d7dca082dfecd"><span class="number">3.1.7.</span>データの削除</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/edit.html" data-alt-hash="id-1f8b5b4047f10e94405a71ee14e2ab2003a52e15"><span class="number">3.1.8.</span>データの編集</a></li>
+                  <li class="numbered visible"><a href="../../tutorials/todo-application/service.html" data-alt-hash="db"><span class="number">3.1.9.</span>DBの更新をトランザクショショナルにする</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="numbered visible">
+            <a href="../index.html" data-alt-hash="id-427e87e11f2aee5d1161c1d76a4b55d46588413c"><span class="number">4.</span>ドキュメント</a>
+            <ul>
+              <li class="numbered visible">
+                <a href="index.html" data-alt-hash="asset-pipeline"><span class="number">4.1.</span>Asset Pipeline</a>
+                <ul>
+                  <li class="numbered visible">
+                    <a href="index.html#id-ebd0ff08cca5ebe0ad7169962654f72a442061d6"><span class="number">4.1.1.</span>概要</a>
+                    <ul>
+                      <li class="numbered invisible"><a href="index.html#id-1ab64cd5bb217128139179796e1c61abc410b161"><span class="number">4.1.1.1.</span>設置場所</a></li>
+                      <li class="numbered invisible"><a href="index.html#id-f11fddc3e47086907039858b901b676c1c5fe38e"><span class="number">4.1.1.2.</span>利用方法</a></li>
+                    </ul>
+                  </li>
+                  <li class="numbered visible">
+                    <a href="index.html#id-6f046867420f35268da0abb04fa3a35cd6dcab32"><span class="number">4.1.2.</span>チュートリアル</a>
+                    <ul>
+                      <li class="numbered invisible">
+                        <a href="index.html#javascript"><span class="number">4.1.2.1.</span>JavaScript</a>
+                        <ul>
+                          <li class="unnumbered invisible"><a href="index.html#id-a4050ecaffba9d3e473d84f45140acebb7fe6ef7">基本</a></li>
+                          <li class="unnumbered invisible"><a href="index.html#id-bb6e68229aa0c3c61a0eaf2bac315b1bf044e3e4">サブディレクトリの作成とJavaScriptファイルの分割</a></li>
+                          <li class="unnumbered invisible"><a href="index.html#id-a6e384bb6a5890ddc15e44e4bd317bcb8397cb9e">詳細</a></li>
+                        </ul>
+                      </li>
+                      <li class="numbered invisible">
+                        <a href="index.html#css"><span class="number">4.1.2.2.</span>CSS</a>
+                        <ul>
+                          <li class="unnumbered invisible"><a href="index.html#id-ebd7b5a621733f87668affb42069fecf6c024265">サブディレクトリの作成とCSSファイルの分割</a></li>
+                        </ul>
+                      </li>
+                      <li class="numbered invisible"><a href="index.html#id-94cf9568fa7973c1b90cc1259d25ab6af608251a"><span class="number">4.1.2.3.</span>画像</a></li>
+                    </ul>
+                  </li>
+                  <li class="numbered visible"><a href="index.html#id-e49b0de846c28f64cd8ee8ff7ba1e9c487dddb0e"><span class="number">4.1.3.</span>外部ライブラリの利用</a></li>
+                  <li class="numbered visible"><a href="index.html#id-acb710a5dd7d3b68c3d1fcbd0e8768b3f3572803"><span class="number">4.1.4.</span>まとめ</a></li>
+                  <li class="numbered visible"><a href="index.html#id-23e780fb4a19e40daf49f001ef42773db2f03876"><span class="number">4.1.5.</span>参考</a></li>
+                </ul>
+              </li>
+              <li class="numbered visible">
+                <a href="additional.html" data-alt-hash="es6scss"><span class="number">4.2.</span>ES6とSCSS</a>
+                <ul>
+                  <li class="numbered visible"><a href="additional.html#es6javascript2015"><span class="number">4.2.1.</span>ES6(JavaScript2015)</a></li>
+                  <li class="numbered visible"><a href="additional.html#sassscss"><span class="number">4.2.2.</span>SASS/SCSS</a></li>
+                  <li class="numbered visible"><a href="additional.html#id-5dfe8713629f941f60d67108ca653f4564ef79f6"><span class="number">4.2.3.</span>まとめ</a></li>
+                  <li class="numbered visible"><a href="additional.html#id-d5b597c8222544d2965037a18b6803f596a4ab38"><span class="number">4.2.4.</span>参考</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="content-handle"></div>
+        <div class="content-container">
+          <div class="content-nav content-nav-top">
+            <a class="prev-page" href="index.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">4.1.</span>
+            Asset Pipeline
+            </a>
+          </div>
+          <div class="page-toc">
+            <ul>
+              <li class="numbered visible">
+                <a href="#es6scss"><span class="number">4.2.</span>ES6とSCSS</a>
+                <ul>
+                  <li class="numbered visible"><a href="#es6javascript2015"><span class="number">4.2.1.</span>ES6(JavaScript2015)</a></li>
+                  <li class="numbered visible"><a href="#sassscss"><span class="number">4.2.2.</span>SASS/SCSS</a></li>
+                  <li class="numbered visible"><a href="#id-5dfe8713629f941f60d67108ca653f4564ef79f6"><span class="number">4.2.3.</span>まとめ</a></li>
+                  <li class="numbered visible"><a href="#id-d5b597c8222544d2965037a18b6803f596a4ab38"><span class="number">4.2.4.</span>参考</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="main-content">
+            <h2 id="es6scss"><span class="number">4.2.</span>ES6とSCSS</h2>
+            <p>G*Advent Calendar(Groovy,Grails,Gradle,Spock&hellip;) Advent Calendar 2016 6日目の記事です。<br/>前日 -&gt; <a href="index.html">私です。Asset Pipelineに付いて書きました。</a><br/>翌日 -&gt; <a href="http://qiita.com/saba1024">私です</a> </p>
+            <h3 id="es6javascript2015"><span class="number">4.2.1.</span>ES6(JavaScript2015)</h3>
+            <p>JavaScriptは当然ブラウザ側で実行されるのもなので、別にサーバ側のGrailsがどうこう考えるものではありませんね。<br/>実際に以下のファイルを<code>grails-app/assets/javascripts/sample.js</code>として保存します。 </p>
+            <pre><code class="javascript">class Person {
+    constructor(name) {
+        this.name = name
+    }
+
+    hello() {
+        alert(&quot;Hello! &quot; + this.name);
+    }
+}
+
+const obj = new Person(&#39;Grails&#39;);
+obj.hello();
+</code></pre>
+            <p>このJavaScriptを読み込むGSPを用意してアクセスした場合、ブラウザに返されるJavaScriptも当然上記と同じものになります。<br/>ただ、やはり古いブラウザやブラウザ間で挙動に差異が合って怖い、なのでまだES6は使えないという環境もあるかと思います。<br/>Grailsに標準で搭載されているAsset Pipelineプラグインはそんな問題も解決してくれます！ </p>
+            <p>では、実際に見てみます。 </p>
+            <p>上記の<code>sample.js</code>というファイル名を<code>sample.es6</code>にリネームします。<br/>これだけで、 <strong>Asset Pipelineが自動的にES6で記述されたJavaScriptをES5形式に変換してくれます。</strong> </p>
+            <p>このファイルを利用するには、例えば<code>assets/javascripts/application.js</code>の中に、 </p>
+            <pre><code class="css">//= require sample
+</code></pre>
+            <p>という1行を追加するか、GSPのheadタグの中で直接、 </p>
+            <pre><code class="html">&lt;asset:javascript src=&quot;sample&quot; /&gt;
+</code></pre>
+            <p>と指定するだけです。<br/>もし拡張子まで指定する場合は、<code>.es6</code>のままでも<code>.js</code>でもどちらでもOKです。<br/>（<code>application.js</code>の中に<code>require_tree .</code>という記述が有る場合には、GSPの中で<code>application.js</code>を読み込むだけでOKです。） </p>
+            <p>この<code>sample.es6</code>は以下のようなJavaScriptに変換されてブラウザに渡されます。 </p>
+            <pre><code class="javascript">/** @struct @constructor */ var Person = function(name) {
+  this.name = name;
+};
+Person.prototype.hello = function() {
+  alert(&quot;Hello! &quot; + this.name);
+};
+/** @const */ var obj = new Person(&quot;Grails&quot;);
+obj.hello();
+</code></pre>
+            <p>見事にES5に変換してくれていますね！ </p>
+            <p>ここでさらに嬉しいニュースです。<br/>例えばES5には無い、定数を扱う<code>const</code>ですが、開発段階でこれが上記のJavaScriptの結果のように、<code>var</code>に変換されると話にならないですよね。書いてる意味がない。<br/>でも！Asset Pipelineなら大丈夫です！<br/>ES6形式（拡張子が.es6）のファイルで、ES6的にありえないコードを書いた場合には、 <strong>ES5にトランスパイルされずES6のままになります。</strong><br/>ためしに<code>sample.js</code>を以下のように修正してみます。 </p>
+            <pre><code class="javascript">class Person {
+    constructor(name) {
+        this.name = name
+    }
+
+    hello() {
+        alert(&quot;Hello! &quot; + this.name);
+    }
+}
+
+const obj = new Person(&#39;Grails&#39;);
+obj.hello();
+obj = 1; // constの値に再代入！これは本来許されない！
+alert(obj);
+</code></pre>
+            <p><code>const</code>で宣言した変数に別の値を再代入していますね。ES6ではこれは許されません、が、もしブラウザに返されるJavaScriptがES5に変換されると、<code>const</code>は<code>var</code>に置き換えられてしまいます。つまりブラウザ上では普通に動作してしまうことになります。<br/>ただし、既に述べたようにES6としておかしなコードはES5に変換されない（トランスパイル出来ない）ので、結果的に <strong>ブラウザ側でES6のまま実行されて、constに再代入できない、というエラーがちゃんと発生します。</strong><br/>実際にブラウザに返されるコードは </p>
+            <pre><code class="javascript">class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  hello() {
+    alert(&quot;Hello! &quot; + this.name);
+  }
+}
+const obj = new Person(&quot;Grails&quot;);
+obj.hello();
+obj = 1;
+alert(obj);
+</code></pre>
+            <p>となっています。実際のソースと変化ありませんね！<br/>（ちなみにChromeだと<code>sample.js?compile=false:11 Uncaught TypeError: Assignment to constant variable.(…)</code>とうエラーがJavaScriptコンソールに表示されます） </p>
+            <p>Grailsで開発を進めるという事は、当然常にGrailsが起動しているわけで、その <strong>Grailsのプラグインとして標準で搭載されているAsset PipelineがES6をES5に自動で トランスパイルしてくれる</strong> ので、別途JavaScriptのトランスパイラなどを用意する必要はありません。<br/>これは非常に便利ですね！ </p>
+            <h3 id="sassscss"><span class="number">4.2.2.</span>SASS/SCSS</h3>
+            <p>さて、CSSを書くとなるとやっぱりSASS/SCSSで書きたくなりますよね！<br/>Grailsに標準で搭載されているAsset Pipelineでは、さらに専用のSASS/SCSSプラグインも利用できるようになっています。<br/>利用方法は至って簡単です。<br/><code>build.gradle</code>の中の<code>dependencies</code>に１行プラグインに関する記述を追加するだけです。 </p>
+            <pre><code class="nohighlight">dependencies {
+    compile &quot;org.springframework.boot:spring-boot-starter-logging&quot;
+    compile &quot;org.springframework.boot:spring-boot-autoconfigure&quot;
+    compile &quot;org.grails:grails-core&quot;
+    compile &quot;org.springframework.boot:spring-boot-starter-actuator&quot;
+    compile &quot;org.springframework.boot:spring-boot-starter-tomcat&quot;
+    compile &quot;org.grails:grails-dependencies&quot;
+    compile &quot;org.grails:grails-web-boot&quot;
+    compile &quot;org.grails.plugins:cache&quot;
+    compile &quot;org.grails.plugins:scaffolding&quot;
+    compile &quot;org.grails.plugins:hibernate5&quot;
+    compile &quot;org.hibernate:hibernate-core:5.1.2.Final&quot;
+    compile &quot;org.hibernate:hibernate-ehcache:5.1.2.Final&quot;
+    console &quot;org.grails:grails-console&quot;
+    profile &quot;org.grails.profiles:web&quot;
+    runtime &quot;com.bertramlabs.plugins:asset-pipeline-grails:2.11.6&quot;
+    runtime &quot;com.h2database:h2&quot;
+    testCompile &quot;org.grails:grails-plugin-testing&quot;
+    testCompile &quot;org.grails.plugins:geb&quot;
+    testRuntime &quot;org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1&quot;
+    testRuntime &quot;net.sourceforge.htmlunit:htmlunit:2.18&quot;
+
+    // これを追加するだけ。
+    assets &quot;com.bertramlabs.plugins:sass-asset-pipeline:2.11.6&quot;
+}
+</code></pre>
+            <p>末尾のバージョン名はGrails3に標準で搭載されているAsset Pipelineのものと同じにすればOKです。<br/>（ちなみにAsset-Pipeline本体は<code>runtime &quot;com.bertramlabs.plugins:asset-pipeline-grails:2.11.6&quot;</code>の部分） </p>
+            <p>あとは、<code>assets/stylesheets</code>の中で自分が作成するCSSのファイルを、拡張子を<code>.sass</code>、もしくは<code>.scss</code>として保存するだけです！<br/><code>.sass</code>、<code>.scss</code>のCSSへのトランスパイルは全てAsset Pipelineが自動で行ってくれます。 </p>
+            <p>つまり<br/><code>hoge.scss</code></p>
+            <pre><code class="css">body {
+    $myColor: #337ab7;
+    
+    padding: 10px;
+    background-color: #cccccc;
+    h1 {
+        color: $myColor;
+    }
+    .content {
+        .title {
+            font-weight: bold;
+        }
+        .description {
+            font-style: italic;
+        }
+    }
+
+    /* 画像表示位置の微調整用に以下を追加！ */
+    .img-size {
+        display: block;
+        margin-top: 10px;
+        width: 50px;
+    }
+}
+</code></pre>
+            <p>というSCSSファイルが合った場合、自動的にCSSへトランスパイルされて、ブラウザには </p>
+            <pre><code class="css">@charset &quot;UTF-8&quot;;
+/* line 1, my-css/my-original.scss */
+body {
+  padding: 10px;
+  background-color: #cccccc;
+  /* 画像表示位置の微調整用に以下を追加！ */
+}
+
+/* line 6, my-css/my-original.scss */
+body h1 {
+  color: #337ab7;
+}
+
+/* line 10, my-css/my-original.scss */
+body .content .title {
+  font-weight: bold;
+}
+
+/* line 13, my-css/my-original.scss */
+body .content .description {
+  font-style: italic;
+}
+
+/* line 19, my-css/my-original.scss */
+body .img-size {
+  display: block;
+  margin-top: 10px;
+  width: 50px;
+}
+</code></pre>
+            <p>というCSSとして返されます。<br/>このファイルを利用するには、例えば<code>assets/stylesheets/application.css</code>の中に、 </p>
+            <pre><code class="css">*= require hoge
+</code></pre>
+            <p>という1行を追加するか、GSPのheadタグの中で直接、 </p>
+            <pre><code class="html">&lt;asset:stylesheet src=&quot;hoge&quot; /&gt;
+</code></pre>
+            <p>と指定するだけです。<br/>もし拡張子まで指定する場合は、<code>.scss</code>のままでも<code>.css</code>でもどちらでもOKです。 </p>
+            <h3 id="id-5dfe8713629f941f60d67108ca653f4564ef79f6"><span class="number">4.2.3.</span>まとめ</h3>
+            <p>Grails3では、標準でES6（JavaScript2015）がトランスパイルでき、さらに追加のプラグインでSASS/SCSSをCSSにトランスパイルすることができる事も分かりました。<br/>Grailsが起動していれば全て自動でトランスパイルが行われるので、別途トランスパイル用のツールを準備、実行する必要はありません。<br/>さらに、Asset Pipelineによってそれらのファイルも一元管理でき、デプロイ時には一つにまとめてminifyまで全て自動で行ってくれます。<br/>Grailsには、モダンなWebアプリケーションを構築するために必要な物が全て揃っているだけではなく、それらが高度に統合され、より快適に、便利にWeb開発が出来るようになっています。 </p>
+            <h3 id="id-d5b597c8222544d2965037a18b6803f596a4ab38"><span class="number">4.2.4.</span>参考</h3>
+            <p><a href="http://plugins.grails.org/plugin/asset-pipeline-grails">Grailsポータル上のプラグイン情報</a><br/><a href="https://github.com/bertramdev/asset-pipeline">Github</a></p>
+          </div>
+          <div class="content-nav content-nav-bottom">
+            <a class="prev-page" href="index.html">
+            <i class="fa fa-angle-left"></i>
+            <span class="number">4.1.</span>
+            Asset Pipeline
+            </a>
+          </div>
+          <div class="footer">
+            <p class="credit text-muted">Powered by <a href="https://github.com/kobo/gaiden">Gaiden</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../js/jquery-2.1.1.min.js"></script>
+    <script src="../../js/highlight.js"></script>
+    <script src="../../js/application.js"></script>
+    <script src="../../js/my.js"></script>
+    <script>
+      if (window.WebSocket) {
+        var socket = new WebSocket("ws://localhost:51556/");
+        socket.onmessage = function () {
+          location.reload();
+        };
+      }
+    </script>
+  </body>
+</html>
