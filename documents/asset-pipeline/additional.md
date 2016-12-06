@@ -1,6 +1,6 @@
 # ES6とSCSS
 
-G*Advent Calendar(Groovy,Grails,Gradle,Spock...) Advent Calendar 2016 6日目の記事です。  
+G*Advent Calendar(Groovy,Grails,Gradle,Spock...) Advent Calendar 2016 7日目の記事です。  
 前日 -> [私です。Asset Pipelineに付いて書きました。](index.html)  
 翌日 -> [私です](http://qiita.com/saba1024)  
 
