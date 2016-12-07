@@ -108,6 +108,23 @@
                   <li class="numbered visible"><a href="documents/asset-pipeline/additional.html#id-d5b597c8222544d2965037a18b6803f596a4ab38"><span class="number">4.2.4.</span>参考</a></li>
                 </ul>
               </li>
+              <li class="numbered visible">
+                <a href="documents/asset-pipeline/outer.html" data-alt-hash="asset"><span class="number">4.3.</span>Asset外の静的ファイル</a>
+                <ul>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/outer.html#id-57c21ef47b097213fccfd4dca25ba5a51ddb6d10"><span class="number">4.3.1.</span>概要</a></li>
+                  <li class="numbered visible">
+                    <a href="documents/asset-pipeline/outer.html#resourcespublic"><span class="number">4.3.2.</span>resources/publicの利用</a>
+                    <ul>
+                      <li class="numbered invisible"><a href="documents/asset-pipeline/outer.html#resources"><span class="number">4.3.2.1.</span>プログラムからResourcesディレクトリ内のファイルにアクセス</a></li>
+                    </ul>
+                  </li>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/outer.html#webapp"><span class="number">4.3.3.</span>webappの利用</a></li>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/outer.html#id-4143c5a309d164e7359553590095447bc7a9d978"><span class="number">4.3.4.</span>注意点</a></li>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/outer.html#id-8a8a48c1b6a1b8a6eed59655dd2621d8b70826c2"><span class="number">4.3.5.</span>どういう時に利用するのか</a></li>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/outer.html#id-5eab13ac907c58a0647f289cd13461c03dfbe759"><span class="number">4.3.6.</span>まとめ</a></li>
+                  <li class="numbered visible"><a href="documents/asset-pipeline/outer.html#id-bd9a4e1a142f1dfbcc4527d59e9c7e7df590e3f2"><span class="number">4.3.7.</span>参考</a></li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
@@ -131,7 +148,8 @@
             <h1 id="grails"><span class="number">1.</span>Grails入門</h1>
             <p>JVM上で動く動的プログラミング言語<a href="http://groovy-lang.org/">Apache Groovy</a>用のフルスタックなWebフレームワーク <a href="https://grails.org/"><strong>Grails</strong></a> の入門用サイトです。 </p>
             <p>このサイトは<a href="https://twitter.com/saba1024">@saba1024</a>が個人的に作成しているものです。<br/>問題等ございましたら優しくお知らせください。<br/>また、チュートリアルとしてTodoアプリを作成して行きますが、Grailsで重要な機能や知識なども別途記載していきますので、Grailsの入門としても活用できるようにしていく予定です。<br/><a href="http://koji-k.github.io/groovy-tutorial/">Apache Groovyのチュートリアルも有ります。</a></p>
-            <pre><code class="nohighlight">2016/12/07 ES6とSCSSに関するページを追加
+            <pre><code class="nohighlight">2016/12/08 Asset外の静的ファイルに関するページを追加
+2016/12/07 ES6とSCSSに関するページを追加
 2016/12/06 Asset Pipelineに関するページを追加
 2016/10/07 公開方法をgh-pagesブランチからmasterブランチのdocsに変更
 2016/07/14 Todoアプリケーションに削除と編集についてを追加
@@ -155,13 +173,5 @@
     <script src="js/highlight.js"></script>
     <script src="js/application.js"></script>
     <script src="js/my.js"></script>
-    <script>
-      if (window.WebSocket) {
-        var socket = new WebSocket("ws://localhost:51556/");
-        socket.onmessage = function () {
-          location.reload();
-        };
-      }
-    </script>
   </body>
 </html>

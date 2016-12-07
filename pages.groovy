@@ -21,4 +21,5 @@
 "documents/index.md"(){
     "documents/asset-pipeline/index.md"()
     "documents/asset-pipeline/additional.md"()
+    "documents/asset-pipeline/outer.md"()
 }
